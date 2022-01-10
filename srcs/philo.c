@@ -51,13 +51,12 @@ int	parsing_errors(char **av)
 		return (TRUE);
 	else if (is_empty(av) == TRUE)
 		return (TRUE);
-	
 	return (FALSE);
 }
 
 int main(int ac, char **av)
 {
-	(void)ac;
+	(void)av;
 	if (ac != 5 || ac != 6)
 		incorrect_arg_num();
 	if (parsing_errors(av) == TRUE)

@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 22:24:17 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/09 17:22:13 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/10 13:56:54 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ int	ft_strlen(char *str)
 {
 	int	i;
 
+	i = 0;
 	if (str == NULL)
-		return (0);
+		return (i);
 	while (str[i] != '\0')
 		i++;
 	return (i);
