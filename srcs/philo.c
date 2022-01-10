@@ -11,56 +11,20 @@
 
 #include "../inc/philo.h"
 
-int	not_integer(char **av)
+void	philo(int ac, char **av)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	while (av[i] != NULL)
-	{
-		j = 0;
-		while (av[i][j] != '\0')
-		{
-			if (av[i][j] < '0' && av[i][j] > '9')
-				return (TRUE);
-			j++;
-		}
-		i++;
-	}
-	return (FALSE);
-}
-
-int	is_empty(char **av)
-{
-	int	i;
-
-	i = 0;
-	while (av[i] != NULL)
-	{
-		if (av[i][0] == '\0')
-			return (TRUE);
-		i++;
-	}
-	return (FALSE);
-}
-
-int	parsing_errors(char **av)
-{
-	if (not_integer(av) == TRUE)
-		return (TRUE);
-	else if (is_empty(av) == TRUE)
-		return (TRUE);
-	return (FALSE);
-}
-
-int main(int ac, char **av)
-{
+	(void)ac;
 	(void)av;
-	if (ac != 5 || ac != 6)
+	printf("OK\n");
+}
+
+int	main(int ac, char **av)
+{
+	if (ac != 5 && ac != 6)
 		incorrect_arg_num();
-	if (parsing_errors(av) == TRUE)
+	if (errors(av) == TRUE)
 		exit (EXIT_FAILURE);
+	philo(ac, av);
 	return (EXIT_SUCCESS);
 }
 

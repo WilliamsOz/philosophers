@@ -1,22 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   not_integer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/07 22:23:05 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/10 14:13:59 by wiozsert         ###   ########.fr       */
+/*   Created: 2022/01/10 14:02:36 by wiozsert          #+#    #+#             */
+/*   Updated: 2022/01/10 14:12:28 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/philo.h"
 
-int	errors(char **av)
+int	not_integer(char **av)
 {
-	if (not_integer(av) == TRUE)
-		return (TRUE);
-	else if (is_empty(av) == TRUE)
-		return (TRUE);
+	int	i;
+	int	j;
+
+	i = 1;
+	while (av[i] != NULL)
+	{
+		j = 0;
+		while (av[i][j] != '\0')
+		{
+			if (av[i][j] < '0' || av[i][j] > '9')
+			{
+				print_fd(2, "Error\nNot integer argument\n");
+				return (TRUE);
+			}
+			j++;
+		}
+		i++;
+	}
 	return (FALSE);
 }

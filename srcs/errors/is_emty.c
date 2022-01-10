@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   is_emty.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/07 22:23:05 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/10 14:13:59 by wiozsert         ###   ########.fr       */
+/*   Created: 2022/01/10 14:03:11 by wiozsert          #+#    #+#             */
+/*   Updated: 2022/01/10 14:04:59 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/philo.h"
 
-int	errors(char **av)
+int	is_empty(char **av)
 {
-	if (not_integer(av) == TRUE)
-		return (TRUE);
-	else if (is_empty(av) == TRUE)
-		return (TRUE);
+	int	i;
+
+	i = 0;
+	while (av[i] != NULL)
+	{
+		if (av[i][0] == '\0')
+		{
+			print_fd(2, "Error\nEmpty argument\n");
+			return (TRUE);
+		}
+		i++;
+	}
 	return (FALSE);
 }

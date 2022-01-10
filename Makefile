@@ -6,7 +6,7 @@
 #    By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/09 17:07:58 by wiozsert          #+#    #+#              #
-#    Updated: 2022/01/09 17:32:14 by wiozsert         ###   ########.fr        #
+#    Updated: 2022/01/10 14:10:12 by wiozsert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ OBJ = $(addsuffix .o, $(notdir $(basename $(SRCS))))
 
 all : $(NAME)
 
-$(NAME) :
+$(NAME) : $(SRCS)
 	mkdir -p obj
 	$(CC) $(FLAGS) -c $(SRCS) 
 	$(CC) $(FLAGS) $(OBJ) -o $(NAME)

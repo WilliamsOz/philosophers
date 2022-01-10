@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/07 22:23:05 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/10 14:13:59 by wiozsert         ###   ########.fr       */
+/*   Created: 2022/01/10 14:06:46 by wiozsert          #+#    #+#             */
+/*   Updated: 2022/01/10 14:07:12 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/philo.h"
+#ifndef UTILS_H
+# define UTILS_H
 
-int	errors(char **av)
-{
-	if (not_integer(av) == TRUE)
-		return (TRUE);
-	else if (is_empty(av) == TRUE)
-		return (TRUE);
-	return (FALSE);
-}
+int		ft_strlen(char *str);
+void	print_fd(int fd, char *str);
+
+#endif
