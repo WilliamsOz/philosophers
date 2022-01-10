@@ -1,41 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   not_integer.c                                      :+:      :+:    :+:   */
+/*   get_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/10 14:02:36 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/10 14:30:28 by wiozsert         ###   ########.fr       */
+/*   Created: 2022/01/10 16:03:40 by wiozsert          #+#    #+#             */
+/*   Updated: 2022/01/10 16:13:01 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/philo.h"
 
-int	not_integer(char **av)
+static	t_data	*__memset_data__(t_data *data)
 {
-	int	i;
-	int	j;
+	data->philo_nbr = -1;
+	data->die = -1;
+	data->eat = -1;
+	data->sleep = -1;
+	data->min_must_eat = -1;
+	return (data);
+}
 
-	i = 1;
-	while (av[i] != NULL)
-	{
-		j = 0;
-		while (av[i][j] != '\0')
-		{
-			if (av[i][j] == '-')
-			{
-				print_fd(2, "Error\nNegative argument\n");
-				return (TRUE);
-			}
-			else if (av[i][j] < '0' || av[i][j] > '9')
-			{
-				print_fd(2, "Error\nNot integer argument\n");
-				return (TRUE);
-			}
-			j++;
-		}
-		i++;
-	}
-	return (FALSE);
+t_data	*get_data(t_data *data, char **av)
+{
+	data = __memset_data__(data);
+	data->philo_nbr = ft_atoi(av[1]);
+	data->die = ft_atoi(av[2]);
+	data->eat = ft_atoi(av[3]);
+	data->sleep = ft_atoi(av[4]);
+	if (av[5] != NULL)
+		data->min_must_eat = ft_atoi(av[5]);
+	return (data);
 }

@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.h                                           :+:      :+:    :+:   */
+/*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/10 14:06:05 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/10 14:28:29 by wiozsert         ###   ########.fr       */
+/*   Created: 2022/01/10 16:01:27 by wiozsert          #+#    #+#             */
+/*   Updated: 2022/01/10 16:10:46 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERRORS_H
-# define ERRORS_H
+#include "../../inc/philo.h"
 
-int		greater_than_integer(char **av);
-int		is_empty(char **av);
-int		not_integer(char **av);
-void	incorrect_arg_num(void);
-int		errors(char **av);
+t_data	*init_data(char **av)
+{
+	t_data	*data;
 
-#endif
+	data = (t_data *)malloc(sizeof(t_data));
+	if (data == NULL)
+		mall_data_failed();
+	data = get_data(data, av);
+	return (data);
+}

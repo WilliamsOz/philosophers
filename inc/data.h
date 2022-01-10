@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.h                                           :+:      :+:    :+:   */
+/*   data.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/10 14:06:05 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/10 14:28:29 by wiozsert         ###   ########.fr       */
+/*   Created: 2022/01/10 16:02:10 by wiozsert          #+#    #+#             */
+/*   Updated: 2022/01/10 16:10:38 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERRORS_H
-# define ERRORS_H
+#ifndef DATA_H
+# define DATA_H
 
-int		greater_than_integer(char **av);
-int		is_empty(char **av);
-int		not_integer(char **av);
-void	incorrect_arg_num(void);
-int		errors(char **av);
+void	mall_data_failed(void);
+t_data	*get_data(t_data *data, char **av);
+t_data	*data_destroyer(t_data *data);
+t_data	*init_data(char **av);
 
 #endif

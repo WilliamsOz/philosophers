@@ -6,12 +6,12 @@
 #    By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/09 17:07:58 by wiozsert          #+#    #+#              #
-#    Updated: 2022/01/10 14:10:12 by wiozsert         ###   ########.fr        #
+#    Updated: 2022/01/10 17:24:26 by wiozsert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
-CC = cc -Wall -Wextra -Werror
+CC = cc -Wall -Wextra -Werror -pthread
 SRCS = $(shell find . -name "*.c")
 OBJ = $(addsuffix .o, $(notdir $(basename $(SRCS))))
 

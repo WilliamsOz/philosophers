@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.h                                           :+:      :+:    :+:   */
+/*   data_structure.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/10 14:06:05 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/10 14:28:29 by wiozsert         ###   ########.fr       */
+/*   Created: 2022/01/10 16:02:53 by wiozsert          #+#    #+#             */
+/*   Updated: 2022/01/10 16:06:13 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERRORS_H
-# define ERRORS_H
+#ifndef DATA_STRUCTURE_H
+# define DATA_STRUCTURE_H
 
-int		greater_than_integer(char **av);
-int		is_empty(char **av);
-int		not_integer(char **av);
-void	incorrect_arg_num(void);
-int		errors(char **av);
+typedef struct s_data
+{
+	int		philo_nbr;
+	int		die;
+	int		eat;
+	int		sleep;
+	int		min_must_eat;
+}			t_data;
 
 #endif

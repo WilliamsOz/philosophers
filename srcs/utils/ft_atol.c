@@ -1,22 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.h                                           :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/10 14:06:05 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/10 14:28:29 by wiozsert         ###   ########.fr       */
+/*   Created: 2022/01/10 14:25:06 by wiozsert          #+#    #+#             */
+/*   Updated: 2022/01/10 14:25:32 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERRORS_H
-# define ERRORS_H
+#include "../../inc/philo.h"
 
-int		greater_than_integer(char **av);
-int		is_empty(char **av);
-int		not_integer(char **av);
-void	incorrect_arg_num(void);
-int		errors(char **av);
+long	ft_atol(const char *str)
+{
+	int		i;
+	int		sign;
+	long	res;
 
-#endif
+	i = 0;
+	sign = 1;
+	res = 0;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			sign = -1;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		res = res * 10 + str[i] - '0';
+		i++;
+	}
+	res = res * sign;
+	return (res);
+}

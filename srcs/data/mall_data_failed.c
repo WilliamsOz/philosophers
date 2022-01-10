@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.h                                           :+:      :+:    :+:   */
+/*   mall_data_failed.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/10 14:06:05 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/10 14:28:29 by wiozsert         ###   ########.fr       */
+/*   Created: 2022/01/10 16:01:50 by wiozsert          #+#    #+#             */
+/*   Updated: 2022/01/10 17:22:40 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERRORS_H
-# define ERRORS_H
+#include "../../inc/philo.h"
 
-int		greater_than_integer(char **av);
-int		is_empty(char **av);
-int		not_integer(char **av);
-void	incorrect_arg_num(void);
-int		errors(char **av);
-
-#endif
+void	mall_data_failed(void)
+{
+	print_fd(2, "Malloc of data has failed\n");
+	exit (EXIT_FAILURE);
+}
