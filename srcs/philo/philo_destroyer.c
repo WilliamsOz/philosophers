@@ -1,35 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_data.c                                         :+:      :+:    :+:   */
+/*   philo_destroyer.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/10 16:03:40 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/12 13:02:40 by wiozsert         ###   ########.fr       */
+/*   Created: 2022/01/12 12:46:50 by wiozsert          #+#    #+#             */
+/*   Updated: 2022/01/12 13:02:01 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/philo.h"
 
-static	t_data	*__memset_data__(t_data *data)
+t_philo	*philo_destroyer(t_philo *philo)
 {
-	data->philo_nbr = -1;
-	data->die = -1;
-	data->eat = -1;
-	data->sleep = -1;
-	data->min_must_eat = -1;
-	return (data);
-}
-
-t_data	*get_data(t_data *data, char **av)
-{
-	data = __memset_data__(data);
-	data->philo_nbr = ft_atoi(av[1]);
-	data->die = ft_atoi(av[2]);
-	data->eat = ft_atoi(av[3]);
-	data->sleep = ft_atoi(av[4]);
-	if (av[5] != NULL)
-		data->min_must_eat = ft_atoi(av[5]);
-	return (data);
+	free(philo);
+	philo = NULL;
+	return (philo);
 }

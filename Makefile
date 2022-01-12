@@ -6,7 +6,7 @@
 #    By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/09 17:07:58 by wiozsert          #+#    #+#              #
-#    Updated: 2022/01/10 17:24:26 by wiozsert         ###   ########.fr        #
+#    Updated: 2022/01/12 13:04:25 by wiozsert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ $(NAME) : $(SRCS)
 	mv $(OBJ) ./obj
 
 clean :
-	rm -Rf ./obj $(OBJ)
+	rm -Rf ./obj
 
 fclean : clean
 	rm -Rf $(NAME)

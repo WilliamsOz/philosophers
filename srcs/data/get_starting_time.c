@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data_structure.h                                   :+:      :+:    :+:   */
+/*   get_starting_time.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/10 16:02:53 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/10 16:06:13 by wiozsert         ###   ########.fr       */
+/*   Created: 2022/01/12 12:58:37 by wiozsert          #+#    #+#             */
+/*   Updated: 2022/01/12 13:02:39 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DATA_STRUCTURE_H
-# define DATA_STRUCTURE_H
+#include "../../inc/philo.h"
 
-typedef struct s_data
+static void	__gettimeofday_failed__(t_philo *philo)
 {
-	int		philo_nbr;
-	int		die;
-	int		eat;
-	int		sleep;
-	int		min_must_eat;
-}			t_data;
+	philo = destroy_all_data(philo);
+	print_fd(2, "gettimeofday has failed\n");
+	exit (EXIT_FAILURE);
+}
 
-#endif
+t_data	*get_starting_time(t_philo *philo)
+{
+	int	ind;
+
+	ind = gettimeofday(&philo->data->starting_time, NULL);
+	if (ind == -1)
+		__gettimeofday_failed__(philo);
+	return (philo->data);
+}

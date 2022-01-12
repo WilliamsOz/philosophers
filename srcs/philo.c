@@ -11,33 +11,44 @@
 
 #include "../inc/philo.h"
 
-void*	routine()
+//DELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDEL
+
+void	print_data(t_data *data)
 {
-	printf("Test from Threads\n");
-	return (NULL);
+	printf("---------------DATA---------------\n");
+	printf("Numbers of philosophers = %d\n", data->philo_nbr);
+	printf("Time to die = %d\n", data->die);
+	printf("Time to eat = %d\n", data->eat);
+	printf("Time to sleep = %d\n", data->sleep);
+	printf("Time to min must eat = %d\n", data->min_must_eat);
+	printf("---------------END---------------\n");
 }
+
+//DELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDEL
+
+
+// void*	routine()
+// {
+// 	printf("Test from Threads\n");
+// 	return (NULL);
+// }
 
 void	philo(int ac, char **av)
 {
-	// t_philo	*philo;
-	// t_data	*data;
+	t_philo	*philo;
 
-	// data = NULL;
-	// daata = init_data(av);
-	// philo = NULL;
+	philo = NULL;
+	philo = init_philo(philo, av);
+	(void)ac;
+
 	// (void)ac;
 	// (void)av;
-	// printf("OK\n");
+	// pthread_t	thread, thread1;
 
-
-	(void)ac;
-	(void)av;
-	pthread_t	thread, thread1;
-
-	pthread_create(&thread, NULL, &routine, NULL);
-	pthread_create(&thread1, NULL, &routine, NULL);
-	pthread_join(thread, NULL);
-	pthread_join(thread1, NULL);
+	// pthread_create(&thread, NULL, &routine, NULL);
+	// pthread_create(&thread1, NULL, &routine, NULL);
+	// pthread_join(thread, NULL);
+	// pthread_join(thread1, NULL);
 }
 
 //./philo(0)	philo_nbrs(1)	die(2)	eat(3)	sleep(4)	min_must_eat(5)
