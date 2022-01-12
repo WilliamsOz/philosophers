@@ -1,41 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_structure.h                                  :+:      :+:    :+:   */
+/*   dlk.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/10 14:31:15 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/12 17:43:05 by wiozsert         ###   ########.fr       */
+/*   Created: 2022/01/12 17:27:11 by wiozsert          #+#    #+#             */
+/*   Updated: 2022/01/12 17:36:25 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_STRUCTURE
-# define PHILO_STRUCTURE
+#ifndef DLK_H
+# define DLK_H
 
-typedef struct s_dlk
-{
-	pthread_t		thread;
-	int				time;
-	struct s_dlk	*next;
-	struct s_dlk	*previous;
-}				t_dlk;
-
-typedef struct s_data
-{
-	int				philo_nbr;
-	int				die;
-	int				eat;
-	int				sleep;
-	int				min_must_eat;
-	struct timeval	starting_time;
-}			t_data;
-
-typedef struct s_philo
-{
-	pthread_t		thread;
-	t_data			*data;
-	t_dlk			*dlk;
-}					t_philo;
+t_dlk	*get_last_node(t_dlk *dlk);
+t_dlk	*init_dlk(t_philo *philo, int philo_nbr);
+t_dlk	*dlk_destroyer(t_dlk *dlk);
 
 #endif

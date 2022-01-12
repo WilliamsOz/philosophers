@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_data.c                                        :+:      :+:    :+:   */
+/*   get_last_node.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/10 16:01:27 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/12 14:24:10 by wiozsert         ###   ########.fr       */
+/*   Created: 2022/01/12 17:35:53 by wiozsert          #+#    #+#             */
+/*   Updated: 2022/01/12 17:36:12 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/philo.h"
 
-static void	__mall_data_failed__(t_philo *philo)
+t_dlk	*get_last_node(t_dlk *dlk)
 {
-	free(philo);
-	philo = NULL;
-	print_fd(2, "Malloc of data has failed\n");
-	exit (EXIT_FAILURE);
-}
+	t_dlk	*tmp;
 
-t_data	*init_data(t_philo *philo, char **av)
-{
-	philo->data = (t_data *)malloc(sizeof(t_data));
-	if (philo->data == NULL)
-		__mall_data_failed__(philo);
-	philo->data = get_data(philo->data, av);
-	philo->data = get_starting_time(philo);
-	return (philo->data);
+	tmp = dlk;
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+	return (tmp);
 }

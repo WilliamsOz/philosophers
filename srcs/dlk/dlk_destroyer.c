@@ -1,20 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destroy_all_data.c                                 :+:      :+:    :+:   */
+/*   dlk_destroyer.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/12 12:45:54 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/12 12:48:42 by wiozsert         ###   ########.fr       */
+/*   Created: 2022/01/12 17:32:57 by wiozsert          #+#    #+#             */
+/*   Updated: 2022/01/12 17:54:10 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/philo.h"
 
-t_philo	*destroy_all_data(t_philo *philo)
+t_dlk	*dlk_destroyer(t_dlk *dlk)
 {
-	philo->data = data_destroyer(philo->data);
-	philo = philo_destroyer(philo);
-	return (philo);
+	t_dlk	*tmp;
+	t_dlk	*keep;
+
+	tmp = dlk->next;
+	keep = tmp->next;
+	while (tmp != dlk)
+	{
+		free(tmp);
+		tmp = NULL;
+		tmp = keep;
+		keep = keep->next;
+	}
+	free(tmp);
+	tmp = NULL;
+	return (dlk);
 }

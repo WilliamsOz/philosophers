@@ -24,6 +24,35 @@ void	print_data(t_data *data)
 	printf("---------------END---------------\n");
 }
 
+void	print_dlk(t_dlk *dlk)
+{
+	t_dlk	*tmp;
+	int		i;
+
+	printf("---------------START TO END---------------\n");
+	tmp = dlk->next;
+	i = 1;
+	printf("Philosophe n°%d\n", dlk->time);
+	i++;
+	while (tmp != dlk)
+	{
+		printf("Philosophe n°%d\n", tmp->time);
+		i++;
+		tmp = tmp->next;
+	}
+	printf("---------------END TO START---------------\n");
+	i--;
+	tmp = dlk->previous;
+	while (tmp != dlk)
+	{
+		printf("Philosophe n°%d\n", i);
+		i--;
+		tmp = tmp->previous;
+	}
+	printf("Philosophe n°%d\n", i);
+	printf("------------------------------------------\n");
+}
+
 //DELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDEL
 
 
@@ -33,13 +62,12 @@ void	print_data(t_data *data)
 // 	return (NULL);
 // }
 
-void	philo(int ac, char **av)
+void	philo(char **av)
 {
 	t_philo	*philo;
 
 	philo = NULL;
 	philo = init_philo(philo, av);
-	(void)ac;
 
 	// (void)ac;
 	// (void)av;
@@ -49,6 +77,7 @@ void	philo(int ac, char **av)
 	// pthread_create(&thread1, NULL, &routine, NULL);
 	// pthread_join(thread, NULL);
 	// pthread_join(thread1, NULL);
+	destroy_all_data(philo);
 }
 
 //./philo(0)	philo_nbrs(1)	die(2)	eat(3)	sleep(4)	min_must_eat(5)
@@ -60,7 +89,7 @@ int	main(int ac, char **av)
 		incorrect_arg_num();
 	if (errors(av) == TRUE)
 		exit (EXIT_FAILURE);
-	philo(ac, av);
+	philo(av);
 	return (EXIT_SUCCESS);
 }
 

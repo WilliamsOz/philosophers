@@ -1,41 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_structure.h                                  :+:      :+:    :+:   */
+/*   destroyer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/10 14:31:15 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/12 17:43:05 by wiozsert         ###   ########.fr       */
+/*   Created: 2022/01/12 12:45:54 by wiozsert          #+#    #+#             */
+/*   Updated: 2022/01/12 17:56:50 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_STRUCTURE
-# define PHILO_STRUCTURE
+#include "../../inc/philo.h"
 
-typedef struct s_dlk
+t_philo	*destroy_philo_and_data(t_philo *philo)
 {
-	pthread_t		thread;
-	int				time;
-	struct s_dlk	*next;
-	struct s_dlk	*previous;
-}				t_dlk;
+	philo->data = data_destroyer(philo->data);
+	philo = philo_destroyer(philo);
+	return (philo);
+}
 
-typedef struct s_data
+t_philo	*destroy_all_data(t_philo *philo)
 {
-	int				philo_nbr;
-	int				die;
-	int				eat;
-	int				sleep;
-	int				min_must_eat;
-	struct timeval	starting_time;
-}			t_data;
-
-typedef struct s_philo
-{
-	pthread_t		thread;
-	t_data			*data;
-	t_dlk			*dlk;
-}					t_philo;
-
-#endif
+	philo->dlk = dlk_destroyer(philo->dlk);
+	philo = destroy_philo_and_data(philo);
+	return (philo);
+}

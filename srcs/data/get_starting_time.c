@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:58:37 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/12 13:02:39 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/12 17:55:30 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	__gettimeofday_failed__(t_philo *philo)
 {
-	philo = destroy_all_data(philo);
 	print_fd(2, "gettimeofday has failed\n");
+	philo = destroy_philo_and_data(philo);
 	exit (EXIT_FAILURE);
 }
 
