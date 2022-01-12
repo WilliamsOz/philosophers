@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 17:26:42 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/12 17:55:37 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/12 18:09:16 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ static t_dlk	*__get_all_node__(t_philo *philo, t_dlk *dlk, int philo_nbr)
 		if (new_node == NULL)
 			__mall_new_node_failed__(philo, dlk);
 		new_node->next = NULL;
-		new_node->time = i++;
+		new_node->time = -1;
+		new_node->is_alive = ALIVE;
 		tmp = get_last_node(dlk);
 		tmp->next = new_node;
 		philo_nbr--;
@@ -86,7 +87,8 @@ t_dlk	*init_dlk(t_philo *philo, int philo_nbr)
 	if (dlk == NULL)
 		__mall_dlk_failed__(philo);
 	dlk->next = NULL;
-	dlk->time = i++;
+	dlk->time = -1;
+	dlk->is_alive = ALIVE;
 	dlk = __get_all_node__(philo, dlk, philo_nbr -1);
 	dlk = link_dlk(dlk);
 	return (dlk);

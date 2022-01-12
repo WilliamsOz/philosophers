@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 14:31:15 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/12 17:43:05 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/12 18:08:28 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ typedef struct s_dlk
 {
 	pthread_t		thread;
 	int				time;
+	int				is_alive;
 	struct s_dlk	*next;
 	struct s_dlk	*previous;
 }				t_dlk;

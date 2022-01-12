@@ -32,11 +32,11 @@ void	print_dlk(t_dlk *dlk)
 	printf("---------------START TO END---------------\n");
 	tmp = dlk->next;
 	i = 1;
-	printf("Philosophe n°%d\n", dlk->time);
+	printf("Philosophe n°%d\n", i);
 	i++;
 	while (tmp != dlk)
 	{
-		printf("Philosophe n°%d\n", tmp->time);
+		printf("Philosophe n°%d\n", i);
 		i++;
 		tmp = tmp->next;
 	}
@@ -56,11 +56,17 @@ void	print_dlk(t_dlk *dlk)
 //DELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDEL
 
 
-// void*	routine()
-// {
-// 	printf("Test from Threads\n");
-// 	return (NULL);
-// }
+void	*routine(void *arg)
+{
+	t_dlk	*dlk;
+	int	i = 0;
+
+	dlk = (t_dlk *)arg;
+	while (i < 10)
+		i++;
+	dlk->is_alive = DEAD;
+	return (dlk);
+}
 
 void	philo(char **av)
 {
@@ -68,15 +74,10 @@ void	philo(char **av)
 
 	philo = NULL;
 	philo = init_philo(philo, av);
-
-	// (void)ac;
-	// (void)av;
-	// pthread_t	thread, thread1;
-
-	// pthread_create(&thread, NULL, &routine, NULL);
-	// pthread_create(&thread1, NULL, &routine, NULL);
-	// pthread_join(thread, NULL);
-	// pthread_join(thread1, NULL);
+	pthread_create(&philo->dlk->thread, NULL, &routine, philo->dlk);
+	
+	pthread_join(philo->dlk->thread, NULL);
+	pthread_join(philo->thread, NULL);
 	destroy_all_data(philo);
 }
 

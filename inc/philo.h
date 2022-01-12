@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 22:03:15 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/12 17:56:48 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/12 18:08:11 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # include "dlk.h"
 # define TRUE 1
 # define FALSE 0
+# define ALIVE 1
+# define DEAD 0
 
 //DELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDEL
 
