@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 16:20:11 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/16 16:48:04 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/16 17:07:55 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,19 @@ void	*__routine_childs__(void *arg)
 {
 	t_dlk	*dlk;
 	t_dlk	*tmp;
+	pthread_mutex_t mutex;
 
 	dlk = (t_dlk *)arg;
 	tmp = dlk;
 	while (1)
 	{
+		pthread_mutex_init(&mutex, NULL);
+		if (tmp->previous->fork == 1 && tmp->fork == 1)
+		{
+			tmp->previous->fork = 0;
+			tmp->fork = 0;
+		}
 		tmp = tmp->next;
-		i++;
 	}
 	return (NULL);
 }
