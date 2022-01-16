@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destroyer.c                                        :+:      :+:    :+:   */
+/*   time.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/12 12:45:54 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/16 16:26:30 by wiozsert         ###   ########.fr       */
+/*   Created: 2022/01/15 15:27:34 by wiozsert          #+#    #+#             */
+/*   Updated: 2022/01/15 15:27:49 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/philo.h"
+#ifndef TIME_H
+#define TIME_H
 
-t_philo	*destroy_philo_and_data(t_philo *philo)
-{
-	philo->data = data_destroyer(philo->data);
-	philo = philo_destroyer(philo);
-	return (philo);
-}
+int	get_time(t_philo *philo);
 
-t_philo	*destroy_all_data(t_philo *philo)
-{
-	philo->dlk = dlk_destroyer(philo->dlk);
-	philo = destroy_philo_and_data(philo);
-	return (philo);
-}
+#endif

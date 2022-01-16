@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 22:03:15 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/12 18:08:11 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/16 16:41:36 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "errors.h"
 # include "data.h"
 # include "dlk.h"
+# include "time.h"
 # define TRUE 1
 # define FALSE 0
 # define ALIVE 1
@@ -32,6 +33,7 @@
 //DELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDEL
 
 # define PD(x) printf("%d\n", x);
+# define PL(x) printf("%ld\n", x);
 # define PC(x) printf("%c\n", x);
 # define PS(x) printf("%s\n", x);
 # define ICI printf("ICI\n");
@@ -42,6 +44,8 @@ void	print_dlk(t_dlk *dlk);
 
 //DELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDEL
 
+void	init_childs(t_philo *philo, int ind);
+void	init_manager(t_philo *philo, int ind);
 t_philo	*destroy_all_data(t_philo *philo);
 t_philo	*init_philo(t_philo *philo, char **av);
 void	mall_philo_failed(void);

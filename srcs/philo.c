@@ -55,29 +55,33 @@ void	print_dlk(t_dlk *dlk)
 
 //DELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDEL
 
-
-void	*routine(void *arg)
+void	init_philosophers(t_philo *philo, int ind)
 {
-	t_dlk	*dlk;
-	int	i = 0;
+	if (ind == 1)
+		init_manager(philo, 0);
+	else if (ind == 0)
+		init_childs(philo, 0);
+}
 
-	dlk = (t_dlk *)arg;
-	while (i < 10)
-		i++;
-	dlk->is_alive = DEAD;
-	return (dlk);
+void	pthread_join_failed(t_philo *philo)
+{
+	philo = destroy_all_data(philo);
+	print_fd(2, "pthread join has failed\n");
+	exit (EXIT_FAILURE);
 }
 
 void	philo(char **av)
 {
 	t_philo	*philo;
+	int		ind;
 
 	philo = NULL;
 	philo = init_philo(philo, av);
-	pthread_create(&philo->dlk->thread, NULL, &routine, philo->dlk);
-	
-	pthread_join(philo->dlk->thread, NULL);
-	pthread_join(philo->thread, NULL);
+	init_philosophers(philo, 1);
+	init_philosophers(philo, 0);
+	ind = pthread_join(philo->thread, NULL);
+	if (ind != 0)
+		pthread_join_failed(philo);
 	destroy_all_data(philo);
 }
 
