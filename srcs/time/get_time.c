@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 15:26:49 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/16 16:05:47 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/17 11:47:46 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,25 @@
 
 static int	__sec_egal__(t_philo *philo, int time)
 {
-	time = philo->dlk->current_time.tv_usec - philo->data->starting_time.tv_usec;
+	time = philo->dlk->current_time.tv_usec
+		- philo->data->starting_time.tv_usec;
 	time /= 1000;
 	return (time);
 }
 
 static int	__sec_not_egal__(t_philo *philo, int time)
 {
-	time = philo->dlk->current_time.tv_sec - philo->data->starting_time.tv_sec;
-	if (time == 1)
-		time = (1000000 - philo->data->starting_time.tv_usec) / 1000;
-	else
+	int	ind;
+
+	ind = philo->dlk->current_time.tv_sec - philo->data->starting_time.tv_sec;
+	if (ind >= 1)
+	{
+		time = philo->dlk->current_time.tv_sec
+			- philo->data->starting_time.tv_sec - 1;
 		time *= 1000;
-	time = time +  ((philo->dlk->current_time.tv_usec) / 1000);
+	}
+	time = time + ((1000000 - (philo->data->starting_time.tv_usec
+					- philo->dlk->current_time.tv_usec)) / 1000);
 	return (time);
 }
 
@@ -40,7 +46,7 @@ void	__gettimeofdayfail__(t_philo *philo)
 
 int	get_time(t_philo *philo)
 {
-	int	time;
+	int				time;
 	int				ind;
 
 	ind = gettimeofday(&philo->dlk->current_time, NULL);

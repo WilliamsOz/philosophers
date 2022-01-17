@@ -6,13 +6,11 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 17:26:42 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/16 13:50:45 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/17 11:49:27 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/philo.h"
-
-int	i = 1;
 
 static void	__mall_dlk_failed__(t_philo *philo)
 {
