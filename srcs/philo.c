@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 22:19:14 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/17 11:49:06 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/17 12:59:14 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,19 @@ void	pthread_join_failed(t_philo *philo)
 	exit (EXIT_FAILURE);
 }
 
+void	init_mutex(t_philo *philo)
+{
+	t_dlk	*tmp;
+
+	tmp = philo->dlk->next;
+	while (tmp != philo->dlk)
+	{
+		pthread_mutex_init(&tmp->fork_mutex, NULL);
+		tmp = tmp->next;
+	}
+	pthread_mutex_init(&tmp->fork_mutex, NULL);
+}
+
 void	philo(char **av)
 {
 	t_philo	*philo;
@@ -80,6 +93,7 @@ void	philo(char **av)
 	philo = init_philo(philo, av);
 	init_philosophers(philo, 1);
 	init_philosophers(philo, 0);
+	init_mutex(philo);
 	ind = pthread_join(philo->thread, NULL);
 	if (ind != 0)
 		pthread_join_failed(philo);

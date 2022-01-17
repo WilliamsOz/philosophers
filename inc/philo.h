@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 22:03:15 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/16 16:41:36 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/17 13:12:07 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@
 # define FALSE 0
 # define ALIVE 1
 # define DEAD 0
+# define FORK 0
+# define EAT 1
+# define SLEEP 2
+# define THINK 3
 
 //DELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDEL
 

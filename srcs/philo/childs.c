@@ -6,11 +6,25 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 16:20:11 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/17 11:51:24 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/17 14:50:41 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/philo.h"
+
+void	print(t_philo *philo, t_dlk *tmp, int ind)
+{
+	pthread_mutex_lock(&philo->print_mutex);
+	if (ind == 0)
+		printf("%d %d has taken a fork\n", get_time(philo), tmp->id);
+	else if (ind == 1)
+		printf("%d %d is eating\n", get_time(philo), tmp->id);
+	else if (ind == 2)
+		printf("%d %d is sleeping\n", get_time(philo), tmp->id);
+	else if (ind == 3)
+		printf("%d %d is thinking\n", get_time(philo), tmp->id);
+	pthread_mutex_unlock(&philo->print_mutex);
+}
 
 void	*__routine_childs__(void *arg)
 {
@@ -21,7 +35,23 @@ void	*__routine_childs__(void *arg)
 	tmp = philo->dlk;
 	while (1)
 	{
-		
+		if (tmp->previous->fork == 1 && tmp->fork == 1)
+		{
+			pthread_mutex_lock(&tmp->fork_mutex);
+			tmp->fork = 0;
+			pthread_mutex_lock(&tmp->previous->fork_mutex);
+			tmp->previous->fork = 0;
+			print(philo, tmp, FORK);
+			print(philo, tmp, EAT);
+			usleep(philo->data->eat);
+			tmp->fork = 1;
+			tmp->previous->fork = 1;
+			pthread_mutex_unlock(&tmp->fork_mutex);
+			pthread_mutex_unlock(&tmp->previous->fork_mutex);
+			print(philo, tmp, SLEEP);
+			print(philo, tmp, THINK);
+			usleep(philo->data->sleep);
+		}
 		tmp = tmp->next;
 	}
 	return (NULL);

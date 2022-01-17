@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 14:31:15 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/17 11:02:31 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/17 13:04:01 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ typedef struct s_dlk
 	pthread_t		thread;
 	struct timeval	current_time;
 	pthread_mutex_t fork_mutex;
+	int				id;
 	int				fork;
 	int				time;
 	int				is_alive;
@@ -40,6 +41,7 @@ typedef struct s_philo
 	pthread_t		thread;
 	t_data			*data;
 	t_dlk			*dlk;
+	pthread_mutex_t print_mutex;
 }					t_philo;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 16:03:40 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/12 13:02:40 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/17 13:03:53 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,8 @@ t_data	*get_data(t_data *data, char **av)
 	data->sleep = ft_atoi(av[4]);
 	if (av[5] != NULL)
 		data->min_must_eat = ft_atoi(av[5]);
+	data->die *= 1000;
+	data->eat *= 1000;
+	data->sleep *= 1000;
 	return (data);
 }
