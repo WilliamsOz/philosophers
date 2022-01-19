@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 22:03:15 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/19 14:08:23 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/19 17:57:04 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,13 @@
 # define EAT 1
 # define SLEEP 2
 # define THINK 3
+# define REDCOLOR printf("\033[0;31m");
+# define GRNCOLOR printf("\033[0;32m");
+# define YELCOLOR printf("\033[0;33m");
+# define BLUCOLOR printf("\033[0;34m");
+# define PRPCOLOR printf("\033[0;35m");
+# define WHTCOLOR printf("\033[0;37m");
+# define ENDCOLOR printf("\033[0m");
 
 //DELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDEL
 
@@ -41,14 +48,18 @@
 # define PL(x) printf("%ld\n", x);
 # define PC(x) printf("%c\n", x);
 # define PS(x) printf("%s\n", x);
+# define PP(x) printf("%p\n", x);
 # define ICI printf("ICI\n");
 void	print_data(t_data *data);
 # define PRTDATA(x) print_data(x);
 void	print_dlk(t_dlk *dlk);
 # define PRTDLK(x) print_dlk(x);
+# define EX exit(EXIT_SUCCESS);
 
 //DELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDEL
 
+void	print_status(t_philo *philo, t_dlk *tmp, int ind);
+void	*routine_childs(void *arg);
 void	init_childs(t_philo *philo, int ind);
 void	init_manager(t_philo *philo, int ind);
 t_philo	*destroy_all_data(t_philo *philo);

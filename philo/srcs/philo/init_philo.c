@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 11:50:01 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/19 14:14:00 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/19 15:33:15 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_dlk	*get_philo_id(t_dlk *dlk)
 	dlk->id = 1;
 	tmp = dlk->next;
 	i = 2;
-	while (tmp != dlk)
+	while (tmp != NULL && tmp != dlk)
 	{
 		tmp->id = i;
 		i++;

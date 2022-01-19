@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 22:19:14 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/19 14:12:32 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/19 18:23:10 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,37 +71,21 @@ void	pthread_join_failed(t_philo *philo)
 	exit (EXIT_FAILURE);
 }
 
-void	init_mutex(t_philo *philo)
-{
-	t_dlk	*tmp;
-
-	tmp = philo->dlk->next;
-	while (tmp != philo->dlk)
-	{
-		pthread_mutex_init(&tmp->fork_mutex, NULL);
-		tmp = tmp->next;
-	}
-	pthread_mutex_init(&tmp->fork_mutex, NULL);
-}
-
 void	philo(char **av)
 {
 	t_philo	*philo;
-	int		ind;
 
 	philo = NULL;
 	philo = init_philo(philo, av);
 	init_philosophers(philo, 1);
 	init_philosophers(philo, 0);
-	init_mutex(philo);
-	ind = pthread_join(philo->thread, NULL);
-	if (ind != 0)
+	if (pthread_join(philo->thread, NULL) != 0)
 		pthread_join_failed(philo);
 	destroy_all_data(philo);
 }
 
-//./philo(0)	philo_nbrs(1)	die(2)	eat(3)	sleep(4)	min_must_eat(5)
-//proteger les fcts threads
+//-fsanitize==thread + leaks a checker
+// exit n'est pas autoriser il faut remonter les erreurs qui arrive
 
 int	main(int ac, char **av)
 {

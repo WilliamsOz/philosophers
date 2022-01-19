@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 14:31:15 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/19 14:13:44 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/19 17:29:43 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_dlk
 	int				fork;
 	int				time;
 	int				is_alive;
+	int				last_eat_time;
 	struct s_dlk	*next;
 	struct s_dlk	*previous;
 }				t_dlk;
