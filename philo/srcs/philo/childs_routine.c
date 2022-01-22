@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 17:02:22 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/22 10:58:41 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/22 13:27:40 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 static t_philo	*__philo_take_fork__(t_philo *philo, t_dlk *dlk)
 {
-	if (pthread_mutex_lock(&dlk->fork_mutex) != 0)
-		mutex_lock_has_failed(philo);
+	pthread_mutex_lock(&dlk->fork_mutex);
 	dlk->fork = 0;
-	if (pthread_mutex_lock(&dlk->previous->fork_mutex) != 0)
-		mutex_lock_has_failed(philo);
+	pthread_mutex_lock(&dlk->previous->fork_mutex);
 	dlk->previous->fork = 0;
 	print_status(philo, dlk, FORK);
 	philo->dlk = dlk;
@@ -31,11 +29,9 @@ static t_philo	*__philo_eat__(t_philo *philo, t_dlk *dlk)
 	print_status(philo, dlk, EAT);
 	usleep(philo->data->eat);
 	dlk->fork = 1;
-	if (pthread_mutex_unlock(&dlk->fork_mutex) != 0)
-		mutex_unlock_has_failed(philo);
+	pthread_mutex_unlock(&dlk->fork_mutex);
 	dlk->previous->fork = 1;
-	if (pthread_mutex_unlock(&dlk->previous->fork_mutex) != 0)
-		mutex_unlock_has_failed(philo);
+	pthread_mutex_unlock(&dlk->previous->fork_mutex);
 	philo->dlk = dlk;
 	return (philo);
 }
@@ -63,10 +59,15 @@ void	*routine_childs(void *arg)
 	dlk = philo->dlk;
 	while (1)
 	{
-		if (dlk->next != NULL && dlk->fork == 1 && dlk->previous->fork == 1)
+		if (dlk->next != NULL && dlk->fork == 1 && dlk->previous->fork == 1
+			&& dlk->ind == 0)
 		{
 			philo = __routine__(philo, dlk);
+			dlk->ind = 1;
 			__philo_sleep__(philo, dlk);
+			pthread_mutex_lock(&dlk->ind_mutex);
+			dlk->ind = 0;
+			pthread_mutex_unlock(&dlk->ind_mutex);
 		}
 		if (dlk->next != NULL)
 			dlk = dlk->next;

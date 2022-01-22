@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 17:32:57 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/12 17:54:10 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/22 13:22:48 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@ t_dlk	*dlk_destroyer(t_dlk *dlk)
 	t_dlk	*tmp;
 	t_dlk	*keep;
 
+	if (dlk->next == NULL)
+	{
+		free(dlk);
+		dlk = NULL;
+		return (dlk);
+	}
 	tmp = dlk->next;
 	keep = tmp->next;
 	while (tmp != dlk)

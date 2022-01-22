@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 22:03:15 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/19 17:57:04 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/22 12:15:52 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@
 # include "data.h"
 # include "dlk.h"
 # include "time.h"
-# include "mutex.h"
+# define ERROR 2
+# define MALLOC_ERROR 2
+# define THREAD_CREATE_ERROR 2
+# define THREAD_JOIN_FAILED 2
 # define TRUE 1
 # define FALSE 0
 # define ALIVE 1
@@ -41,6 +44,7 @@
 # define PRPCOLOR printf("\033[0;35m");
 # define WHTCOLOR printf("\033[0;37m");
 # define ENDCOLOR printf("\033[0m");
+
 
 //DELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDEL
 
@@ -60,11 +64,10 @@ void	print_dlk(t_dlk *dlk);
 
 void	print_status(t_philo *philo, t_dlk *tmp, int ind);
 void	*routine_childs(void *arg);
-void	init_childs(t_philo *philo, int ind);
-void	init_manager(t_philo *philo, int ind);
+int		init_childs(t_philo *philo, int ind);
+int		init_manager(t_philo *philo, int ind);
 t_philo	*destroy_all_data(t_philo *philo);
 t_philo	*init_philo(t_philo *philo, char **av);
-void	mall_philo_failed(void);
 t_philo	*destroy_philo_and_data(t_philo *philo);
 t_philo	*philo_destroyer(t_philo *philo);
 

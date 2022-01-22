@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 22:19:14 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/22 11:08:22 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/22 13:30:32 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,39 +56,51 @@ void	print_dlk(t_dlk *dlk)
 
 //DELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDEL
 
-void	init_philosophers(t_philo *philo, int ind)
+int	init_philosophers(t_philo *philo, int ind)
 {
 	if (ind == 1)
-		init_manager(philo, 0);
+		ind = init_manager(philo, 0);
 	else if (ind == 0)
-		init_childs(philo, 0);
+		ind = init_childs(philo, 0);
+	return (ind);
 }
 
 void	pthread_join_failed(t_philo *philo)
 {
 	philo = destroy_all_data(philo);
 	print_fd(2, "pthread join has failed\n");
-	exit (EXIT_FAILURE);
 }
 
-void	philo(char **av)
+int	philo(char **av, int philo_exit_status)
 {
 	t_philo	*philo;
 
 	philo = NULL;
 	philo = init_philo(philo, av);
-	init_philosophers(philo, 1);
-	init_philosophers(philo, 0);
+	if (philo == NULL)
+		return (MALLOC_ERROR);
+	philo_exit_status = init_philosophers(philo, 1);
+	philo_exit_status = init_philosophers(philo, 0);
+	if (philo_exit_status != 0)
+		return (philo_exit_status);
 	if (pthread_join(philo->thread, NULL) != 0)
+	{
 		pthread_join_failed(philo);
-	destroy_all_data(philo);
+		philo_exit_status = THREAD_JOIN_FAILED;
+		return (philo_exit_status);
+	}
+	philo_exit_status = philo->exit_status;
+	philo = destroy_all_data(philo);
+	return (philo_exit_status);
 }
 
 //-fsanitize==thread + leaks a checker
-// exit n'est pas autoriser il faut remonter les erreurs qui arrive
+// il reste des exit avec le temp ect
 
 int	main(int ac, char **av)
 {
+	int		philo_exit_status;
+
 	if (ac != 5 && ac != 6)
 	{
 		print_fd(2, "Numbers of arguments incorrect\n");
@@ -96,6 +108,6 @@ int	main(int ac, char **av)
 	}
 	else if (errors(av) == TRUE)
 		return (2);
-	philo(av);
-	return (EXIT_SUCCESS);
+	philo_exit_status = philo(av, 0);
+	return (philo_exit_status);
 }
