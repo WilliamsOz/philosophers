@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 22:19:14 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/22 13:30:32 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/22 21:22:41 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,33 @@ void	pthread_join_failed(t_philo *philo)
 	print_fd(2, "pthread join has failed\n");
 }
 
+int	wait_thread(t_philo *philo, int philo_exit_status)
+{
+	t_dlk	*tmp;
+
+	if (pthread_join(philo->thread, NULL) != 0)
+	{
+		pthread_join_failed(philo);
+		philo_exit_status = THREAD_JOIN_FAILED;
+	}
+	tmp = philo->dlk->next;
+	while (tmp != philo->dlk)
+	{
+		if (pthread_join(tmp->thread, NULL) != 0)
+		{
+			pthread_join_failed(philo);
+			philo_exit_status = THREAD_JOIN_FAILED;
+		}
+		tmp = tmp->next;
+	}
+	if (pthread_join(tmp->thread, NULL) != 0)
+	{
+		pthread_join_failed(philo);
+		philo_exit_status = THREAD_JOIN_FAILED;
+	}
+	return (philo_exit_status);
+}
+
 int	philo(char **av, int philo_exit_status)
 {
 	t_philo	*philo;
@@ -83,12 +110,7 @@ int	philo(char **av, int philo_exit_status)
 	philo_exit_status = init_philosophers(philo, 0);
 	if (philo_exit_status != 0)
 		return (philo_exit_status);
-	if (pthread_join(philo->thread, NULL) != 0)
-	{
-		pthread_join_failed(philo);
-		philo_exit_status = THREAD_JOIN_FAILED;
-		return (philo_exit_status);
-	}
+	philo_exit_status = wait_thread(philo, 0);
 	philo_exit_status = philo->exit_status;
 	philo = destroy_all_data(philo);
 	return (philo_exit_status);

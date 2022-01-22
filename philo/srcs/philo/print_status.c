@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 15:16:39 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/22 12:19:06 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/22 21:31:55 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ static void	__philo_think__(t_philo *philo, t_dlk *tmp)
 
 void	print_status(t_philo *philo, t_dlk *tmp, int ind)
 {
-	if (ind == FORK)
+	if (ind == FORK && philo->exit_status != -1)
 		__philo_fork__(philo, tmp);
-	else if (ind == EAT)
+	else if (ind == EAT && philo->exit_status != -1)
 		__philo_eat__(philo, tmp);
-	else if (ind == SLEEP)
+	else if (ind == SLEEP && philo->exit_status != -1)
 		__philo_sleep(philo, tmp);
-	else if (ind == THINK)
+	else if (ind == THINK && philo->exit_status != -1)
 		__philo_think__(philo, tmp);
 }

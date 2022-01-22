@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 16:09:37 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/22 13:19:16 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/22 21:29:45 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,11 @@ static void	*__routine_manager__(void *arg)
 	}
 	if (tmp->is_alive == DEAD)
 	{
+		pthread_mutex_lock(&philo->print_mutex);
 		REDCOLOR
 		printf("%d %d died\n", get_time(philo), tmp->id);
 		ENDCOLOR
-		philo->exit_status = 0;
+		philo->exit_status = -1;
 	}
 	return (NULL);
 }
