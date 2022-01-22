@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 17:02:22 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/19 18:22:52 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/22 10:58:41 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,7 @@ void	*routine_childs(void *arg)
 	dlk = philo->dlk;
 	while (1)
 	{
-		if (dlk->next != NULL && dlk->fork == 1 && dlk->previous->fork == 1
-			&& dlk->id % 2 == 1 && ind == 1)
+		if (dlk->next != NULL && dlk->fork == 1 && dlk->previous->fork == 1)
 		{
 			philo = __routine__(philo, dlk);
 			__philo_sleep__(philo, dlk);

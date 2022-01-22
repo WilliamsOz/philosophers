@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 22:19:14 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/19 18:23:10 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/22 11:08:22 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,12 @@ void	philo(char **av)
 int	main(int ac, char **av)
 {
 	if (ac != 5 && ac != 6)
-		incorrect_arg_num();
-	if (errors(av) == TRUE)
-		exit (EXIT_FAILURE);
+	{
+		print_fd(2, "Numbers of arguments incorrect\n");
+		return (2);
+	}
+	else if (errors(av) == TRUE)
+		return (2);
 	philo(av);
 	return (EXIT_SUCCESS);
 }
