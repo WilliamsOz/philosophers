@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 22:19:14 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/22 21:22:41 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/22 21:43:07 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ int	wait_thread(t_philo *philo, int philo_exit_status)
 {
 	t_dlk	*tmp;
 
-	if (pthread_join(philo->thread, NULL) != 0)
+	if (pthread_join(philo->thread, NULL) != 0
+		|| pthread_join(philo->dlk->thread, NULL) != 0)
 	{
 		pthread_join_failed(philo);
 		philo_exit_status = THREAD_JOIN_FAILED;
@@ -89,11 +90,6 @@ int	wait_thread(t_philo *philo, int philo_exit_status)
 			philo_exit_status = THREAD_JOIN_FAILED;
 		}
 		tmp = tmp->next;
-	}
-	if (pthread_join(tmp->thread, NULL) != 0)
-	{
-		pthread_join_failed(philo);
-		philo_exit_status = THREAD_JOIN_FAILED;
 	}
 	return (philo_exit_status);
 }

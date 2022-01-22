@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 17:02:22 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/22 21:30:44 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/22 21:41:33 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static void	__philo_sleep__(t_philo *philo, t_dlk *dlk)
 
 static t_philo	*__routine__(t_philo *philo, t_dlk *dlk)
 {
+	if (philo->exit_status == -1)
+		return (philo);
 	philo = __philo_take_fork__(philo, dlk);
 	philo = __philo_eat__(philo, dlk);
 	return (philo);
@@ -60,7 +62,7 @@ void	*routine_childs(void *arg)
 	while (1 && philo->exit_status != -1)
 	{
 		if (dlk->next != NULL && dlk->fork == 1 && dlk->previous->fork == 1
-			&& dlk->ind == 0)
+			&& dlk->ind == 0 && philo->exit_status != -1)
 		{
 			philo = __routine__(philo, dlk);
 			pthread_mutex_lock(&dlk->ind_mutex);
