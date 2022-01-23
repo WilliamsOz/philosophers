@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 17:02:22 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/22 21:41:33 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/23 11:54:20 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ void	*routine_childs(void *arg)
 		if (dlk->next != NULL && dlk->fork == 1 && dlk->previous->fork == 1
 			&& dlk->ind == 0 && philo->exit_status != -1)
 		{
+			dlk->ind = 1;
 			philo = __routine__(philo, dlk);
 			pthread_mutex_lock(&dlk->ind_mutex);
-			dlk->ind = 1;
 			__philo_sleep__(philo, dlk);
 			dlk->ind = 0;
 			pthread_mutex_unlock(&dlk->ind_mutex);
