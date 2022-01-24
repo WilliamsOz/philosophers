@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 16:09:37 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/24 16:30:32 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/24 23:18:51 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,19 @@ static void	*__routine_manager__(void *arg)
 	tmp = philo->dlk;
 	while (1)
 	{
-		if (philo->data->min_must_eat != -1 && __everyone_ate__(philo) == TRUE)
+		if ((philo->data->min_must_eat != -1 && __everyone_ate__(philo) == TRUE)
+			|| tmp->is_alive == DEAD)
 		{
+			pthread_mutex_lock(&philo->print_mutex);
 			philo->exit_status = -1;
 			break ;
 		}
-		if (tmp->is_alive == DEAD)
-			break ;
 		else if (tmp->next != NULL)
 			tmp = tmp->next;
 		tmp = __death_starving__(philo, tmp);
 	}
 	if (tmp->is_alive == DEAD)
 	{
-		pthread_mutex_lock(&philo->print_mutex);
 		REDCOLOR
 		printf("%d %d died\n", get_time(philo), tmp->id);
 		ENDCOLOR
