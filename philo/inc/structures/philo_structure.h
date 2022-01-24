@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_structure.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oozsertt <oozsertt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 14:31:15 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/24 11:27:31 by oozsertt         ###   ########.fr       */
+/*   Updated: 2022/01/24 16:03:44 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_dlk
 	int				is_alive;
 	int				last_eat_time;
 	int				ind;
+	int				eating_number;
 	pthread_mutex_t	ind_mutex;
 	struct s_dlk	*next;
 	struct s_dlk	*previous;

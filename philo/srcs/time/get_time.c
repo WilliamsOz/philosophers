@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_time.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oozsertt <oozsertt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 15:26:49 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/24 11:35:35 by oozsertt         ###   ########.fr       */
+/*   Updated: 2022/01/24 15:58:11 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,11 @@ static int	__sec_not_egal__(t_philo *philo, int time)
 	return (time);
 }
 
-void	__gettimeofdayfail__(t_philo *philo)
+static t_philo	*__gettimeofdayfail__(t_philo *philo)
 {
 	print_fd(2, "gettimeofday has failed\n");
-	philo->dlk = dlk_destroyer(philo->dlk);
-	philo = destroy_philo_and_data(philo);
-	exit (EXIT_FAILURE);
+	philo->exit_status = -1;
+	return (philo);
 }
 
 int	get_time(t_philo *philo)
@@ -49,9 +48,13 @@ int	get_time(t_philo *philo)
 	int				time;
 	int				ind;
 
+	time = 0;
 	ind = gettimeofday(&philo->dlk->current_time, NULL);
 	if (ind == -1)
-		__gettimeofdayfail__(philo);
+	{
+		philo = __gettimeofdayfail__(philo);
+		return (time);
+	}
 	if (philo->data->starting_time.tv_sec == philo->dlk->current_time.tv_sec)
 		time = __sec_egal__(philo, 0);
 	else

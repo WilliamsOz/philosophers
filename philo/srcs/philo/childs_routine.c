@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   childs_routine.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oozsertt <oozsertt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 17:02:22 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/24 11:35:36 by oozsertt         ###   ########.fr       */
+/*   Updated: 2022/01/24 16:37:59 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static t_philo	*__philo_take_fork__(t_philo *philo, t_dlk *dlk)
 
 static t_philo	*__philo_eat__(t_philo *philo, t_dlk *dlk)
 {
-	dlk->last_eat_time = get_time(philo);
 	print_status(philo, dlk, EAT);
 	usleep(philo->data->eat);
 	dlk->fork = 1;
@@ -39,15 +38,15 @@ static t_philo	*__philo_eat__(t_philo *philo, t_dlk *dlk)
 static void	__philo_sleep__(t_philo *philo, t_dlk *dlk)
 {
 	print_status(philo, dlk, SLEEP);
+	dlk->eating_number++;
 	usleep(philo->data->sleep);
 	print_status(philo, dlk, THINK);
 }
 
 static t_philo	*__routine__(t_philo *philo, t_dlk *dlk)
 {
-	if (philo->exit_status == -1)
-		return (philo);
 	philo = __philo_take_fork__(philo, dlk);
+	dlk->last_eat_time = get_time(philo);
 	philo = __philo_eat__(philo, dlk);
 	return (philo);
 }
@@ -59,7 +58,7 @@ void	*routine_childs(void *arg)
 
 	philo = (t_philo *)arg;
 	dlk = philo->dlk;
-	while (1 && philo->exit_status != -1)
+	while (philo->exit_status != -1)
 	{
 		if (dlk->next != NULL && dlk->fork == 1 && dlk->previous->fork == 1
 			&& dlk->ind == 0 && philo->exit_status != -1)
@@ -71,7 +70,7 @@ void	*routine_childs(void *arg)
 			dlk->ind = 0;
 			pthread_mutex_unlock(&dlk->ind_mutex);
 		}
-		if (dlk->next != NULL)
+		if (dlk->next != NULL && philo->exit_status != -1)
 			dlk = dlk->next;
 	}
 	return (NULL);

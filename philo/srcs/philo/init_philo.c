@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_philo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oozsertt <oozsertt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 11:50:01 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/24 11:31:53 by oozsertt         ###   ########.fr       */
+/*   Updated: 2022/01/24 16:19:05 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ t_dlk	*get_philo_id(t_dlk *dlk)
 	return (dlk);
 }
 
-t_philo	*init_philo(t_philo *philo, char **av)
+t_philo	*init_philo(char **av)
 {
+	t_philo	*philo;
+
 	philo = (t_philo *)malloc(sizeof(t_philo));
 	if (philo == NULL)
 		return (NULL);
@@ -43,11 +45,17 @@ t_philo	*init_philo(t_philo *philo, char **av)
 	philo->data = NULL;
 	philo->data = init_data(philo, av);
 	if (philo->data == NULL)
+	{
+		philo = destroy_all_data(philo);
 		return (NULL);
+	}
 	philo->dlk = NULL;
 	philo->dlk = init_dlk(philo, philo->data->philo_nbr);
 	if (philo->dlk == NULL)
+	{
+		philo = destroy_all_data(philo);
 		return (NULL);
+	}
 	philo->dlk = get_philo_id(philo->dlk);
 	pthread_mutex_init(&philo->print_mutex, NULL);
 	return (philo);

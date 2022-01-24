@@ -3,39 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   manager.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oozsertt <oozsertt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 16:09:37 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/24 11:39:03 by oozsertt         ###   ########.fr       */
+/*   Updated: 2022/01/24 16:30:32 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/philo.h"
 
-static void	__thread_manager_create_failed__(t_philo *philo)
-{
-	philo = destroy_all_data(philo);
-	print_fd(2, "Creation of thread manager has failed\n");
-}
-
-t_dlk	*death_starving(t_philo *philo, t_dlk *dlk)
+static t_dlk	*__death_starving__(t_philo *philo, t_dlk *dlk)
 {
 	int	time_last_eat;
 
 	time_last_eat = 0;
-	if (get_time(philo) == dlk->last_eat_time)
-		time_last_eat = 0;
-	else
-		time_last_eat = (get_time(philo)) - dlk->last_eat_time; 
-	if (time_last_eat > (philo->data->die / 1000))
+	time_last_eat = (get_time(philo)) - dlk->last_eat_time; 
+	if (get_time(philo) != dlk->last_eat_time
+		&& time_last_eat > (philo->data->die / 1000))
 	{
-		PD(get_time(philo))
-		PD(dlk->last_eat_time)
-		PD(get_time(philo) - dlk->last_eat_time)
-		PD(philo->data->die / 1000)
-		dlk->is_alive = DEAD;
+		if ((get_time(philo) - dlk->last_eat_time) > (philo->data->die / 1000))
+			dlk->is_alive = DEAD;
 	}
 	return (dlk);
+}
+
+static int	__everyone_ate__(t_philo *philo)
+{
+	t_dlk	*dlk;
+
+	dlk = philo->dlk->next;
+	while (dlk != philo->dlk)
+	{
+		if (dlk->eating_number < philo->data->min_must_eat)
+			return (FALSE);
+		dlk = dlk->next;
+	}
+	return (TRUE);
 }
 
 static void	*__routine_manager__(void *arg)
@@ -47,11 +50,16 @@ static void	*__routine_manager__(void *arg)
 	tmp = philo->dlk;
 	while (1)
 	{
+		if (philo->data->min_must_eat != -1 && __everyone_ate__(philo) == TRUE)
+		{
+			philo->exit_status = -1;
+			break ;
+		}
 		if (tmp->is_alive == DEAD)
 			break ;
 		else if (tmp->next != NULL)
 			tmp = tmp->next;
-		tmp = death_starving(philo, tmp);
+		tmp = __death_starving__(philo, tmp);
 	}
 	if (tmp->is_alive == DEAD)
 	{
@@ -70,7 +78,7 @@ int	init_manager(t_philo *philo, int ind)
 			&__routine_manager__, philo);
 	if (ind != 0)
 	{
-		__thread_manager_create_failed__(philo);
+		print_fd(2, "Creation of thread manager has failed\n");
 		return (THREAD_CREATE_ERROR);
 	}
 	return (philo->exit_status);

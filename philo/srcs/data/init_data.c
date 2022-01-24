@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oozsertt <oozsertt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 16:01:27 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/24 11:29:57 by oozsertt         ###   ########.fr       */
+/*   Updated: 2022/01/24 16:07:04 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 static t_philo	*__mall_data_failed__(t_philo *philo)
 {
-	free(philo);
-	philo = NULL;
 	print_fd(2, "Malloc of data has failed\n");
+	philo->exit_status = -1;
 	return (philo);
 }
 
