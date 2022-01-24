@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 15:22:20 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/24 16:38:07 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/24 23:25:13 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static t_philo	*__wait_childs__(t_philo *philo, int *ptr_philo_exit_status)
 	while (philo->dlk->next != NULL && philo->dlk->id != 1)
 		philo->dlk = philo->dlk->next;
 	tmp = philo->dlk;
-	if (pthread_detach(tmp->thread) != 0)
+	if (pthread_join(tmp->thread, NULL) != 0)
 	{
 		philo = __pthread_join_failed__(philo);
 		*ptr_philo_exit_status = THREAD_JOIN_FAILED;
@@ -44,7 +44,7 @@ static t_philo	*__wait_childs__(t_philo *philo, int *ptr_philo_exit_status)
 	tmp = tmp->next;
 	while (tmp->next != NULL && tmp->id != 1)
 	{
-		if (pthread_detach(tmp->thread) != 0)
+		if (pthread_join(tmp->thread, NULL) != 0)
 		{
 			philo = __pthread_join_failed__(philo);
 			*ptr_philo_exit_status = THREAD_JOIN_FAILED;
