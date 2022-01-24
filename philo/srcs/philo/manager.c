@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manager.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oozsertt <oozsertt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 16:09:37 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/22 21:44:18 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/24 11:39:03 by oozsertt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,21 @@ static void	__thread_manager_create_failed__(t_philo *philo)
 
 t_dlk	*death_starving(t_philo *philo, t_dlk *dlk)
 {
-	if ((get_time(philo) - dlk->last_eat_time) > (philo->data->die / 1000))
+	int	time_last_eat;
+
+	time_last_eat = 0;
+	if (get_time(philo) == dlk->last_eat_time)
+		time_last_eat = 0;
+	else
+		time_last_eat = (get_time(philo)) - dlk->last_eat_time; 
+	if (time_last_eat > (philo->data->die / 1000))
+	{
+		PD(get_time(philo))
+		PD(dlk->last_eat_time)
+		PD(get_time(philo) - dlk->last_eat_time)
+		PD(philo->data->die / 1000)
 		dlk->is_alive = DEAD;
+	}
 	return (dlk);
 }
 

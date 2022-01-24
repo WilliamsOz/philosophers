@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oozsertt <oozsertt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 22:19:14 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/22 21:43:07 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/24 11:39:15 by oozsertt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ int	philo(char **av, int philo_exit_status)
 
 //-fsanitize==thread + leaks a checker
 // il reste des exit avec le temp ect
+// pb ./philo 2 180 60 60
 
 int	main(int ac, char **av)
 {
