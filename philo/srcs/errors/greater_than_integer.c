@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   greater_than_integer.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oozsertt <oozsertt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 14:28:10 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/24 11:30:17 by oozsertt         ###   ########.fr       */
+/*   Updated: 2022/01/25 15:26:20 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int	greater_than_integer(char **av)
 			print_fd(2, "Error\nGreater than integer\n");
 			return (TRUE);
 		}
-		else if (nb == 0)
+		else if (i == 1 && nb == 0)
 		{
-			print_fd(2, "Error\nZero as argument number\n");
+			print_fd(2, "Error\nNumber of philosopher can't be zero\n");
 			return (TRUE);
 		}
 		i++;

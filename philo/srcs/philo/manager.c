@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 16:09:37 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/24 23:18:51 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/25 15:50:36 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,16 @@ static t_dlk	*__death_starving__(t_philo *philo, t_dlk *dlk)
 {
 	int	time_last_eat;
 
+	pthread_mutex_lock(&dlk->last_eat_time_mutex);
 	time_last_eat = 0;
-	time_last_eat = (get_time(philo)) - dlk->last_eat_time; 
+	time_last_eat = (get_time(philo)) - dlk->last_eat_time;
 	if (get_time(philo) != dlk->last_eat_time
 		&& time_last_eat > (philo->data->die / 1000))
 	{
 		if ((get_time(philo) - dlk->last_eat_time) > (philo->data->die / 1000))
 			dlk->is_alive = DEAD;
 	}
+	pthread_mutex_unlock(&dlk->last_eat_time_mutex);
 	return (dlk);
 }
 
@@ -31,54 +33,53 @@ static int	__everyone_ate__(t_philo *philo)
 {
 	t_dlk	*dlk;
 
+	if (philo->dlk->next == NULL)
+		return (FALSE);
 	dlk = philo->dlk->next;
 	while (dlk != philo->dlk)
 	{
+		pthread_mutex_lock(&dlk->eating_number_mutex);
 		if (dlk->eating_number < philo->data->min_must_eat)
+		{
+			pthread_mutex_unlock(&dlk->eating_number_mutex);
 			return (FALSE);
+		}
+		pthread_mutex_unlock(&dlk->eating_number_mutex);
 		dlk = dlk->next;
 	}
 	return (TRUE);
 }
 
-static void	*__routine_manager__(void *arg)
+static t_philo	*__philo_is_dead__(t_philo *philo, t_dlk *tmp)
 {
-	t_philo	*philo;
+	REDCOLOR
+	printf("%d %d died\n", get_time(philo), tmp->id);
+	ENDCOLOR
+	return (philo);
+}
+
+int	manager(t_philo *philo) 
+{
 	t_dlk	*tmp;
 
-	philo = (t_philo *)arg;
 	tmp = philo->dlk;
 	while (1)
 	{
-		if ((philo->data->min_must_eat != -1 && __everyone_ate__(philo) == TRUE)
-			|| tmp->is_alive == DEAD)
+		tmp = __death_starving__(philo, tmp);
+		if (tmp->is_alive == DEAD || (philo->data->min_must_eat != -1
+			&& __everyone_ate__(philo) == TRUE))
 		{
 			pthread_mutex_lock(&philo->print_mutex);
+			pthread_mutex_lock(&philo->exit_status_mutex);
 			philo->exit_status = -1;
+			pthread_mutex_unlock(&philo->exit_status_mutex);
 			break ;
 		}
-		else if (tmp->next != NULL)
+		if (tmp->next != NULL)
 			tmp = tmp->next;
-		tmp = __death_starving__(philo, tmp);
 	}
 	if (tmp->is_alive == DEAD)
-	{
-		REDCOLOR
-		printf("%d %d died\n", get_time(philo), tmp->id);
-		ENDCOLOR
-		philo->exit_status = -1;
-	}
-	return (NULL);
-}
-
-int	init_manager(t_philo *philo, int ind)
-{
-	ind = pthread_create(&philo->thread, NULL,
-			&__routine_manager__, philo);
-	if (ind != 0)
-	{
-		print_fd(2, "Creation of thread manager has failed\n");
-		return (THREAD_CREATE_ERROR);
-	}
-	return (philo->exit_status);
+		philo = __philo_is_dead__(philo, tmp);
+	pthread_mutex_unlock(&philo->print_mutex);
+	return (0);
 }

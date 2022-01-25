@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 17:26:42 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/24 16:04:10 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/25 15:13:53 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static t_dlk	*__get_all_node__(t_philo *philo, t_dlk *dlk, int philo_nbr)
 		new_node->fork = 1;
 		new_node->last_eat_time = 0;
 		new_node->eating_number = 0;
-		dlk->ind = 0;
+		new_node->ate = 0;
 		pthread_mutex_init(&new_node->fork_mutex, NULL);
 		tmp = get_last_node(dlk);
 		tmp->next = new_node;
@@ -103,8 +103,8 @@ t_dlk	*init_dlk(t_philo *philo, int philo_nbr)
 	dlk->is_alive = ALIVE;
 	dlk->fork = 1;
 	dlk->last_eat_time = 0;
-	dlk->ind = 0;
 	dlk->eating_number = 0;
+	dlk->ate = 0;
 	dlk = __get_all_node__(philo, dlk, philo_nbr -1);
 	if (dlk != NULL)
 		dlk = link_dlk(dlk);

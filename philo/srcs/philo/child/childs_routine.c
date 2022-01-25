@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_emty.c                                          :+:      :+:    :+:   */
+/*   childs_routine.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/10 14:03:11 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/25 15:24:31 by wiozsert         ###   ########.fr       */
+/*   Created: 2022/01/19 17:02:22 by wiozsert          #+#    #+#             */
+/*   Updated: 2022/01/25 15:51:01 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/philo.h"
+#include "../../../inc/philo.h"
 
-int	is_empty(char **av)
+void	*routine_childs(void *arg)
 {
-	int	i;
+	t_philo	*philo;
+	t_dlk	*dlk;
 
-	i = 1;
-	while (av[i] != NULL)
+	philo = (t_philo *)arg;
+	dlk = philo->dlk;
+	while (1 && is_it_end(philo) == FALSE)
 	{
-		if (av[i][0] == '\0')
-		{
-			print_fd(2, "Error\nEmpty argument\n");
-			return (TRUE);
-		}
-		i++;
+		dlk = do_routine(philo, dlk);
+		if (dlk->next != NULL)
+			dlk = dlk->next;
 	}
-	return (FALSE);
+	return (NULL);
 }

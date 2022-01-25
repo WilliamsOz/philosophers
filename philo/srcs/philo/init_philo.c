@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 11:50:01 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/24 16:19:05 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/25 15:14:05 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,19 @@ t_dlk	*get_philo_id(t_dlk *dlk)
 	int		i;
 
 	dlk->id = 1;
-	pthread_mutex_init(&dlk->ind_mutex, NULL);
+	pthread_mutex_init(&dlk->last_eat_time_mutex, NULL);
+	pthread_mutex_init(&dlk->eating_number_mutex, NULL);
 	pthread_mutex_init(&dlk->fork_mutex, NULL);
+	pthread_mutex_init(&dlk->ate_mutex, NULL);
 	tmp = dlk->next;
 	i = 2;
 	while (tmp != NULL && tmp != dlk)
 	{
-		pthread_mutex_init(&tmp->ind_mutex, NULL);
+		pthread_mutex_init(&tmp->last_eat_time_mutex, NULL);
+		pthread_mutex_init(&tmp->eating_number_mutex, NULL);
 		pthread_mutex_init(&tmp->fork_mutex, NULL);
+		pthread_mutex_init(&tmp->ate_mutex, NULL);
 		tmp->id = i;
-		tmp->ind = 0;
 		i++;
 		tmp = tmp->next;
 	}
@@ -58,5 +61,6 @@ t_philo	*init_philo(char **av)
 	}
 	philo->dlk = get_philo_id(philo->dlk);
 	pthread_mutex_init(&philo->print_mutex, NULL);
+	pthread_mutex_init(&philo->exit_status_mutex, NULL);
 	return (philo);
 }

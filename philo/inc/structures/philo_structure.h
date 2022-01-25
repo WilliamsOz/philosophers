@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 14:31:15 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/24 16:03:44 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/25 15:13:46 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@ typedef struct s_dlk
 	int				time;
 	int				is_alive;
 	int				last_eat_time;
-	int				ind;
 	int				eating_number;
-	pthread_mutex_t	ind_mutex;
+	int				ate;
+	pthread_mutex_t	ate_mutex;
+	pthread_mutex_t	last_eat_time_mutex;
+	pthread_mutex_t	eating_number_mutex;
 	struct s_dlk	*next;
 	struct s_dlk	*previous;
 }				t_dlk;
@@ -42,10 +44,10 @@ typedef struct s_data
 
 typedef struct s_philo
 {
-	pthread_t		thread;
 	t_data			*data;
 	t_dlk			*dlk;
 	pthread_mutex_t print_mutex;
+	pthread_mutex_t	exit_status_mutex;
 	int				exit_status;
 }					t_philo;
 

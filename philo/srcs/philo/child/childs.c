@@ -6,11 +6,11 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 16:20:11 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/22 12:50:16 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/25 12:12:54 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/philo.h"
+#include "../../../inc/philo.h"
 
 static int	__thread_childs_create_failed__(t_philo *philo)
 {
