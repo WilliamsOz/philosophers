@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 12:17:32 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/25 15:50:44 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/25 16:35:41 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,9 @@ t_dlk	*do_routine(t_philo *philo, t_dlk *dlk)
 			philo = __routine__(philo, dlk);
 			pthread_mutex_unlock(&dlk->ate_mutex);
 			__philo_sleep__(philo, dlk);
+			pthread_mutex_lock(&dlk->ate_mutex);
 			dlk->ate = 0;
+			pthread_mutex_unlock(&dlk->ate_mutex);
 		}
 		else
 			pthread_mutex_unlock(&dlk->ate_mutex);

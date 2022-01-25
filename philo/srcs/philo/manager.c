@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 16:09:37 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/25 15:50:36 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/25 16:34:38 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ static int	__everyone_ate__(t_philo *philo)
 
 static t_philo	*__philo_is_dead__(t_philo *philo, t_dlk *tmp)
 {
-	REDCOLOR
+	printf("\033[0;31m");
 	printf("%d %d died\n", get_time(philo), tmp->id);
-	ENDCOLOR
+	printf("\033[0m");
 	return (philo);
 }
 
-int	manager(t_philo *philo) 
+int	manager(t_philo *philo)
 {
 	t_dlk	*tmp;
 
@@ -67,7 +67,7 @@ int	manager(t_philo *philo)
 	{
 		tmp = __death_starving__(philo, tmp);
 		if (tmp->is_alive == DEAD || (philo->data->min_must_eat != -1
-			&& __everyone_ate__(philo) == TRUE))
+				&& __everyone_ate__(philo) == TRUE))
 		{
 			pthread_mutex_lock(&philo->print_mutex);
 			pthread_mutex_lock(&philo->exit_status_mutex);

@@ -6,18 +6,18 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 14:31:15 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/25 15:13:46 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/25 16:25:44 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_STRUCTURE
-# define PHILO_STRUCTURE
+#ifndef PHILO_STRUCTURE_H
+# define PHILO_STRUCTURE_H
 
 typedef struct s_dlk
 {
 	pthread_t		thread;
 	struct timeval	current_time;
-	pthread_mutex_t fork_mutex;
+	pthread_mutex_t	fork_mutex;
 	int				id;
 	int				fork;
 	int				time;
@@ -46,7 +46,7 @@ typedef struct s_philo
 {
 	t_data			*data;
 	t_dlk			*dlk;
-	pthread_mutex_t print_mutex;
+	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	exit_status_mutex;
 	int				exit_status;
 }					t_philo;
