@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 22:03:15 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/25 16:30:59 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/26 11:48:03 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # define SLEEP 2
 # define THINK 3
 
+void	destroy_all_mutex(t_philo *philo);
 t_dlk	*do_routine(t_philo *philo, t_dlk *dlk);
 int		is_it_end(t_philo *philo);
 t_philo	*wait_threads(t_philo *philo, int *ptr_philo_exit_status);

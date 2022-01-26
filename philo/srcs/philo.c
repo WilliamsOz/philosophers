@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 22:19:14 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/25 16:45:46 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/26 11:55:00 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ int	philo(char **av, int philo_exit_status)
 	}
 	philo = wait_threads(philo, &philo_exit_status);
 	if (philo != NULL)
+	{
+		destroy_all_mutex(philo);
 		philo = destroy_all_data(philo);
+	}
 	return (philo_exit_status);
 }
 

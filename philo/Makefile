@@ -6,12 +6,12 @@
 #    By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/09 17:07:58 by wiozsert          #+#    #+#              #
-#    Updated: 2022/01/25 16:45:31 by wiozsert         ###   ########.fr        #
+#    Updated: 2022/01/26 11:54:55 by wiozsert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
-CC = cc -Wall -Wextra -Werror -pthread
+CC = cc -Wall -Wextra -Werror -pthread -g3
 SRCS = ./srcs/time/get_time.c ./srcs/data/init_data.c \
 ./srcs/data/get_starting_time.c ./srcs/data/data_destroyer.c \
 ./srcs/data/get_data.c ./srcs/philo/child/routine.c \
