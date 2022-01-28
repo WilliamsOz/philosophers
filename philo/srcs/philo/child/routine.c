@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oozsertt <oozsertt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 12:17:32 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/25 16:35:41 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/29 00:50:17 by oozsertt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,23 +59,26 @@ static t_philo	*__routine__(t_philo *philo, t_dlk *dlk)
 
 t_dlk	*do_routine(t_philo *philo, t_dlk *dlk)
 {
+	// pthread_mutex_lock(&philo->exit_status_mutex);
 	if (dlk->next != NULL)
 	{
+		// pthread_mutex_unlock(&philo->exit_status_mutex);
 		pthread_mutex_lock(&dlk->fork_mutex);
 		pthread_mutex_lock(&dlk->previous->fork_mutex);
 		if (dlk->fork == 1 && dlk->previous->fork == 1)
 		{
 			pthread_mutex_unlock(&dlk->fork_mutex);
 			pthread_mutex_unlock(&dlk->previous->fork_mutex);
-			pthread_mutex_lock(&dlk->ate_mutex);
-			dlk->ate = 1;
+			// pthread_mutex_lock(&dlk->ate_mutex);
+			// dlk->ate = 1;
 			philo = __routine__(philo, dlk);
 			__philo_sleep__(philo, dlk);
-			dlk->ate = 0;
-			pthread_mutex_unlock(&dlk->ate_mutex);
+			// dlk->ate = 0;
+			// pthread_mutex_unlock(&dlk->ate_mutex);
 		}
 		else
 		{
+			// pthread_mutex_unlock(&philo->exit_status_mutex);
 			pthread_mutex_unlock(&dlk->fork_mutex);
 			pthread_mutex_unlock(&dlk->previous->fork_mutex);
 		}
