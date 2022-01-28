@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME = philo
-CC = cc -Wall -Wextra -Werror -pthread -g3
+CC = cc -Wall -Wextra -Werror -pthread
 SRCS = ./srcs/time/get_time.c ./srcs/data/init_data.c \
 ./srcs/data/get_starting_time.c ./srcs/data/data_destroyer.c \
 ./srcs/data/get_data.c ./srcs/philo/child/routine.c \

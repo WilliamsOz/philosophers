@@ -15,15 +15,13 @@
 void	*routine_childs(void *arg)
 {
 	t_philo	*philo;
-	t_dlk	*dlk;
 
 	philo = (t_philo *)arg;
-	dlk = philo->dlk;
 	while (1 && is_it_end(philo) == FALSE)
 	{
-		dlk = do_routine(philo, dlk);
-		if (dlk->next != NULL)
-			dlk = dlk->next;
+		philo->dlk = do_routine(philo, philo->dlk);
+		if (philo->dlk->next != NULL)
+			philo->dlk = philo->dlk->next;
 	}
 	return (NULL);
 }

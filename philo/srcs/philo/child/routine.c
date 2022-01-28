@@ -61,19 +61,24 @@ t_dlk	*do_routine(t_philo *philo, t_dlk *dlk)
 {
 	if (dlk->next != NULL)
 	{
-		pthread_mutex_lock(&dlk->ate_mutex);
-		if (dlk->ate == 0)
+		pthread_mutex_lock(&dlk->fork_mutex);
+		pthread_mutex_lock(&dlk->previous->fork_mutex);
+		if (dlk->fork == 1 && dlk->previous->fork == 1)
 		{
+			pthread_mutex_unlock(&dlk->fork_mutex);
+			pthread_mutex_unlock(&dlk->previous->fork_mutex);
+			pthread_mutex_lock(&dlk->ate_mutex);
 			dlk->ate = 1;
 			philo = __routine__(philo, dlk);
-			pthread_mutex_unlock(&dlk->ate_mutex);
 			__philo_sleep__(philo, dlk);
-			pthread_mutex_lock(&dlk->ate_mutex);
 			dlk->ate = 0;
 			pthread_mutex_unlock(&dlk->ate_mutex);
 		}
 		else
-			pthread_mutex_unlock(&dlk->ate_mutex);
+		{
+			pthread_mutex_unlock(&dlk->fork_mutex);
+			pthread_mutex_unlock(&dlk->previous->fork_mutex);
+		}
 	}
 	return (dlk);
 }
