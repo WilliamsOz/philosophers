@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_starting_time.c                                :+:      :+:    :+:   */
+/*   get_philo_id.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/12 12:58:37 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/30 15:35:41 by wiozsert         ###   ########.fr       */
+/*   Created: 2022/01/30 16:16:55 by wiozsert          #+#    #+#             */
+/*   Updated: 2022/01/30 16:24:44 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/philo.h"
 
-static t_data	*__gettimeofday_failed__(t_data *data)
+t_dlk	*get_philo_id(t_dlk *dlk)
 {
-	print_fd(2, "gettimeofday has failed\n");
-	data->exit_status = -1;
-	return (data);
-}
+	t_dlk	*tmp;
+	int		i;
+	int		count;
 
-t_data	*get_starting_time(t_data *data)
-{
-	int	ind;
-
-	ind = gettimeofday(&data->starting_time, NULL);
-	if (ind == -1)
-		data = __gettimeofday_failed__(data);
-	return (data);
+	tmp = dlk;
+	count = dlk->data->philo_nbr;
+	i = 1;
+	while (count > 0)
+	{
+		dlk = init_dlk_mutex(dlk);
+		tmp->id = i;
+		count -= 1;
+		i += 1;
+		tmp = tmp->next;
+	}
+	return (dlk);
 }

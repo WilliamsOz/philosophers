@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 17:02:22 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/25 16:34:41 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/30 17:22:42 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,9 @@
 
 void	*routine_childs(void *arg)
 {
-	t_philo	*philo;
+	t_dlk		*dlk;
 
-	philo = (t_philo *)arg;
-	while (1 && is_it_end(philo) == FALSE)
-	{
-		philo->dlk = do_routine(philo, philo->dlk);
-		if (philo->dlk->next != NULL)
-			philo->dlk = philo->dlk->next;
-	}
+	dlk = (t_dlk *)arg;
+	do_routine(dlk);
 	return (NULL);
 }

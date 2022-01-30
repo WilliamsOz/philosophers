@@ -6,35 +6,31 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 16:20:11 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/25 16:34:53 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/30 17:06:12 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../inc/philo.h"
 
-static int	__thread_childs_create_failed__(t_philo *philo)
+static int	__thread_childs_create_failed__(t_data *data)
 {
-	philo = destroy_all_data(philo);
 	print_fd(2, "Creation of thread child has failed\n");
-	philo->exit_status = THREAD_CREATE_ERROR;
-	return (philo->exit_status);
+	data->exit_status = -1;
+	return (data->exit_status);
 }
 
-int	init_childs(t_philo *philo, int ind)
+int	init_childs(t_data *data, t_dlk *dlk, int count, int ind)
 {
 	t_dlk	*tmp;
 
-	ind = pthread_create(&philo->dlk->thread, NULL,
-			&routine_childs, philo);
-	if (ind != 0)
-		ind = __thread_childs_create_failed__(philo);
-	tmp = philo->dlk->next;
-	while (ind != ERROR && tmp != NULL && tmp != philo->dlk)
+	tmp = dlk;
+	while (tmp->next != NULL && count > 0 && ind != -1)
 	{
-		ind = pthread_create(&tmp->thread, NULL, &routine_childs, philo);
+		ind = pthread_create(&tmp->thread, NULL, &routine_childs, tmp);
 		if (ind != 0)
-			ind = __thread_childs_create_failed__(philo);
+			ind = __thread_childs_create_failed__(data);
 		tmp = tmp->next;
+		count -= 1;
 	}
 	return (ind);
 }

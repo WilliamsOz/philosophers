@@ -6,28 +6,32 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 16:01:27 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/24 16:07:04 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/30 16:16:13 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/philo.h"
 
-static t_philo	*__mall_data_failed__(t_philo *philo)
+static t_data	*__mall_data_failed__(t_data *data)
 {
 	print_fd(2, "Malloc of data has failed\n");
-	philo->exit_status = -1;
-	return (philo);
+	data->exit_status = -1;
+	return (data);
 }
 
-t_data	*init_data(t_philo *philo, char **av)
+t_data	*init_data(char **av)
 {
-	philo->data = (t_data *)malloc(sizeof(t_data));
-	if (philo->data == NULL)
+	t_data	*data;
+
+	data = (t_data *)malloc(sizeof(t_data));
+	if (data == NULL)
 	{
-		philo = __mall_data_failed__(philo);
+		data = __mall_data_failed__(data);
 		return (NULL);
 	}
-	philo->data = get_data(philo->data, av);
-	philo->data = get_starting_time(philo);
-	return (philo->data);
+	data = get_philo_data(data, av);
+	data = get_starting_time(data);
+	pthread_mutex_init(&data->print_mutex, NULL);
+	pthread_mutex_init(&data->exit_status_mutex, NULL);
+	return (data);
 }

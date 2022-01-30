@@ -6,30 +6,30 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 15:22:20 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/25 15:29:04 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/30 16:08:24 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/philo.h"
 
-static t_philo	*__pthread_join_failed__(t_philo *philo)
+static t_data	*__pthread_join_failed__(t_data *data)
 {
-	philo = destroy_all_data(philo);
 	print_fd(2, "pthread join has failed\n");
-	return (philo);
+	data->exit_status = -1;
+	return (data);
 }
 
-static t_philo	*__wait_childs__(t_philo *philo, int *ptr_philo_exit_status)
+static t_data	*__wait_childs__(t_data *data, t_dlk *dlk)
 {
 	t_dlk	*tmp;
 
-	while (philo->dlk->next != NULL && philo->dlk->id != 1)
-		philo->dlk = philo->dlk->next;
-	tmp = philo->dlk;
+	while (dlk->next != NULL && dlk->id != 1)
+		dlk = dlk->next;
+	tmp = dlk;
 	if (pthread_join(tmp->thread, NULL) != 0)
 	{
-		philo = __pthread_join_failed__(philo);
-		*ptr_philo_exit_status = THREAD_JOIN_FAILED;
+		data = __pthread_join_failed__(data);
+		return (data);
 	}
 	if (tmp->next != NULL)
 		tmp = tmp->next;
@@ -37,20 +37,19 @@ static t_philo	*__wait_childs__(t_philo *philo, int *ptr_philo_exit_status)
 	{
 		if (pthread_join(tmp->thread, NULL) != 0)
 		{
-			philo = __pthread_join_failed__(philo);
-			*ptr_philo_exit_status = THREAD_JOIN_FAILED;
+			data = __pthread_join_failed__(data);
+			return (data);
 		}
 		tmp = tmp->next;
 	}
-	return (philo);
+	return (data);
 }
 
-t_philo	*wait_threads(t_philo *philo, int *ptr_philo_exit_status)
+t_data	*wait_threads(t_data *data, t_dlk *dlk)
 {
 	int	philo_exit_status;
 
 	philo_exit_status = 0;
-	philo = __wait_childs__(philo, &philo_exit_status);
-	*ptr_philo_exit_status = philo_exit_status;
-	return (philo);
+	data = __wait_childs__(data, dlk);
+	return (data);
 }

@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_destroyer.c                                  :+:      :+:    :+:   */
+/*   init_dlk_mutex.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/12 12:46:50 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/22 12:19:07 by wiozsert         ###   ########.fr       */
+/*   Created: 2022/01/30 16:18:45 by wiozsert          #+#    #+#             */
+/*   Updated: 2022/01/30 16:19:44 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/philo.h"
 
-t_philo	*philo_destroyer(t_philo *philo)
+t_dlk	*init_dlk_mutex(t_dlk *dlk)
 {
-	free(philo);
-	philo = NULL;
-	return (philo);
+	pthread_mutex_init(&dlk->last_eat_time_mutex, NULL);
+	pthread_mutex_init(&dlk->eating_number_mutex, NULL);
+	pthread_mutex_init(&dlk->fork_mutex, NULL);
+	return (dlk);
 }

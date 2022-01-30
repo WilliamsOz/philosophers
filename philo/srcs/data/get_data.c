@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 16:03:40 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/24 15:59:26 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/30 15:50:11 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static	t_data	*__memset_data__(t_data *data)
 	return (data);
 }
 
-t_data	*get_data(t_data *data, char **av)
+t_data	*get_philo_data(t_data *data, char **av)
 {
 	data = __memset_data__(data);
 	data->philo_nbr = ft_atoi(av[1]);
