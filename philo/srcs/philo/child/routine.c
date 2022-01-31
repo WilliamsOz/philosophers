@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 12:17:32 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/30 17:54:33 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/31 16:33:45 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,36 +26,52 @@ static void	__philo_eat__(t_dlk *dlk)
 {
 	print_status(dlk->data, dlk, EAT);
 	usleep(dlk->data->eat);
+	pthread_mutex_lock(&dlk->fork_mutex);
+	pthread_mutex_lock(&dlk->previous->fork_mutex);
 	dlk->fork = 1;
-	dlk->next->fork = 1;
+	dlk->previous->fork = 1;
 	pthread_mutex_unlock(&dlk->fork_mutex);
-	pthread_mutex_unlock(&dlk->next->fork_mutex);
+	pthread_mutex_unlock(&dlk->previous->fork_mutex);
 }
 
-static void	__philo_take_fork__(t_dlk *dlk)
+static int	philo_take_one_fork(t_dlk *dlk)
 {
 	pthread_mutex_lock(&dlk->fork_mutex);
-	pthread_mutex_lock(&dlk->next->fork_mutex);
-	dlk->fork = 0;
-	dlk->next->fork = 0;
-	print_status(dlk->data, dlk, FORK);
-}
-
-static void	__routine__(t_dlk *dlk)
-{
-	__philo_take_fork__(dlk);
-	pthread_mutex_lock(&dlk->last_eat_time_mutex);
-	dlk->last_eat_time = get_time(dlk->data, dlk);
-	pthread_mutex_unlock(&dlk->last_eat_time_mutex);
-	__philo_eat__(dlk);
-}
-
-void	do_routine(t_dlk *dlk)
-{
-	while (is_it_end(dlk) == FALSE)
+	if (dlk->fork == 1)
 	{
-		__routine__(dlk);
+		dlk->fork = 0;
+		print_status(dlk->data, dlk, FORK);
+		pthread_mutex_unlock(&dlk->fork_mutex);
+		return (TRUE);
+	}
+	pthread_mutex_unlock(&dlk->fork_mutex);
+	return (FALSE);
+}
+
+static int	philo_take_second_fork(t_dlk *dlk)
+{
+	pthread_mutex_lock(&dlk->previous->fork_mutex);
+	if (dlk->previous->fork == 1)
+	{
+		dlk->previous->fork = 0;
+		print_status(dlk->data, dlk, FORK);
+		pthread_mutex_unlock(&dlk->previous->fork_mutex);
+		return (TRUE);
+	}
+	pthread_mutex_unlock(&dlk->previous->fork_mutex);
+	return (FALSE);
+}
+
+void	__routine__(t_dlk *dlk)
+{
+	while (philo_take_one_fork(dlk) == FALSE && is_it_end(dlk) == FALSE);
+	while (philo_take_second_fork(dlk) == FALSE && is_it_end(dlk) == FALSE);
+	if (is_it_end(dlk) == FALSE)
+	{
+		pthread_mutex_lock(&dlk->last_eat_time_mutex);
+		dlk->last_eat_time = get_time();
+		pthread_mutex_unlock(&dlk->last_eat_time_mutex);
+		__philo_eat__(dlk);
 		__philo_sleep__(dlk);
 	}
-	return ;
 }

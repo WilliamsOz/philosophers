@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 22:03:15 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/30 16:23:38 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/31 16:00:29 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,7 @@
 # include "data.h"
 # include "dlk.h"
 # include "time.h"
-# define ENDCOLOR 
 # define ERROR 2
-# define THREAD_CREATE_ERROR 2
-# define THREAD_JOIN_FAILED 2
 # define TRUE 1
 # define FALSE 0
 # define ALIVE 1
@@ -38,19 +35,7 @@
 # define SLEEP 2
 # define THINK 3
 
-# define PD(x) printf("%d\n", x);
-# define PL(x) printf("%ld\n", x);
-# define PC(x) printf("%c\n", x);
-# define PS(x) printf("%s\n", x);
-# define PP(x) printf("%p\n", x);
-# define ICI printf("ICI\n");
-void    print_data(t_data *data);
-# define PRTDATA(x) print_data(x);
-void    print_dlk(t_dlk *dlk);
-# define PRTDLK(x) print_dlk(x);
-# define EX exit(EXIT_SUCCESS);
-
-void	do_routine(t_dlk *dlk);
+void	__routine__(t_dlk *dlk);
 int		is_it_end(t_dlk *dlk);
 void	*routine_childs(void *arg);
 void	print_status(t_data *data, t_dlk *tmp, int ind);

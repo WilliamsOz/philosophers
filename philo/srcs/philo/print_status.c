@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 15:16:39 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/30 16:26:41 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/31 16:31:10 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	__philo_sleep(t_data *data, t_dlk *tmp)
 	if (data->exit_status != -1)
 	{
 		printf("\033[0;34m");
-		printf("%d	%d	is sleeping\n", get_time(data, tmp), tmp->id);
+		printf("%ld	%d	is sleeping\n", get_time(), tmp->id);
 		printf("\033[0m");
 	}
 }
@@ -27,7 +27,7 @@ static void	__philo_eat__(t_data *data, t_dlk *tmp)
 	if (data->exit_status != -1)
 	{
 		printf("\033[0;32m");
-		printf("%d	%d	is eating\n", get_time(data, tmp), tmp->id);
+		printf("%ld	%d	is eating\n", get_time(), tmp->id);
 		printf("\033[0m");
 	}
 }
@@ -37,8 +37,7 @@ static void	__philo_fork__(t_data *data, t_dlk *tmp)
 	if (data->exit_status != -1)
 	{
 		printf("\033[0;33m");
-		printf("%d	%d	has taken a fork\n", get_time(data, tmp), tmp->id);
-		printf("%d	%d	has taken a fork\n", get_time(data, tmp), tmp->id);
+		printf("%ld	%d	has taken a fork\n", get_time(), tmp->id);
 		printf("\033[0m");
 	}
 }
@@ -48,7 +47,7 @@ static void	__philo_think__(t_data *data, t_dlk *tmp)
 	if (data->exit_status != -1)
 	{
 		printf("\033[0;35m");
-		printf("%d	%d	is thinking\n", get_time(data, tmp), tmp->id);
+		printf("%ld	%d	is thinking\n", get_time(), tmp->id);
 		printf("\033[0m");
 	}
 }
