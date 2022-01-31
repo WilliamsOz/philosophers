@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 17:26:42 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/31 16:19:51 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/30 16:56:42 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,5 @@ t_dlk	*init_dlk(t_data *data, int philo_nbr)
 	dlk = __get_all_node__(data, dlk, philo_nbr -1);
 	if (dlk != NULL)
 		dlk = link_dlk(dlk);
-	if (dlk->next == NULL)
-		dlk->next = dlk;
 	return (dlk);
 }

@@ -6,14 +6,13 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 15:27:34 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/31 16:25:41 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/31 17:48:51 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TIME_H
 # define TIME_H
 
-// int	get_time(t_data *data, t_dlk *dlk);
 long	get_time(void);
 
 #endif

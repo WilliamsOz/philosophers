@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 15:22:20 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/31 15:32:53 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/30 16:08:24 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static t_data	*__wait_childs__(t_data *data, t_dlk *dlk)
 {
 	t_dlk	*tmp;
 
+	while (dlk->next != NULL && dlk->id != 1)
+		dlk = dlk->next;
 	tmp = dlk;
 	if (pthread_join(tmp->thread, NULL) != 0)
 	{

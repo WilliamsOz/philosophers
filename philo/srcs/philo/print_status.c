@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 15:16:39 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/31 16:31:10 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/31 17:49:07 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static void	__philo_fork__(t_data *data, t_dlk *tmp)
 	if (data->exit_status != -1)
 	{
 		printf("\033[0;33m");
+		printf("%ld	%d	has taken a fork\n", get_time(), tmp->id);
 		printf("%ld	%d	has taken a fork\n", get_time(), tmp->id);
 		printf("\033[0m");
 	}

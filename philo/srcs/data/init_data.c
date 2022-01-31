@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 16:01:27 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/31 16:20:14 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/30 16:16:13 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ t_data	*init_data(char **av)
 		return (NULL);
 	}
 	data = get_philo_data(data, av);
+	data = get_starting_time(data);
 	pthread_mutex_init(&data->print_mutex, NULL);
 	pthread_mutex_init(&data->exit_status_mutex, NULL);
-	data = get_starting_time(data);
 	return (data);
 }
