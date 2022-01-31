@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 16:18:45 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/30 16:19:44 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/31 18:16:00 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 t_dlk	*init_dlk_mutex(t_dlk *dlk)
 {
 	pthread_mutex_init(&dlk->last_eat_time_mutex, NULL);
-	pthread_mutex_init(&dlk->eating_number_mutex, NULL);
 	pthread_mutex_init(&dlk->fork_mutex, NULL);
 	return (dlk);
 }

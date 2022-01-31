@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 16:09:37 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/31 17:49:26 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/31 18:26:08 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static t_dlk	*__death_starving__(t_data *data, t_dlk *dlk)
 	return (dlk);
 }
 
-static int	__everyone_ate__(t_data *data, t_dlk *dlk)
+static int	__everyone_ate__(t_dlk *dlk)
 {
 	t_dlk	*tmp;
 	int		count;
@@ -38,13 +38,8 @@ static int	__everyone_ate__(t_data *data, t_dlk *dlk)
 	count = dlk->data->philo_nbr;
 	while (tmp->next != NULL && count > 0)
 	{
-		pthread_mutex_lock(&dlk->eating_number_mutex);
-		if (dlk->eating_number < data->min_must_eat)
-		{
-			pthread_mutex_unlock(&dlk->eating_number_mutex);
+		if (dlk->eating_number != -1)
 			return (FALSE);
-		}
-		pthread_mutex_unlock(&dlk->eating_number_mutex);
 		dlk = dlk->next;
 		count -= 1;
 	}
@@ -68,12 +63,12 @@ int	manager(t_data *data, t_dlk *dlk)
 	{
 		tmp = __death_starving__(data, tmp);
 		if (tmp->is_alive == DEAD || (data->min_must_eat != -1
-				&& __everyone_ate__(data, dlk) == TRUE))
+				&& __everyone_ate__(dlk) == TRUE))
 		{
-			pthread_mutex_lock(&data->print_mutex);
-			pthread_mutex_lock(&data->exit_status_mutex);
+			// pthread_mutex_lock(&data->print_mutex);
+			// pthread_mutex_lock(&data->exit_status_mutex);
 			data->exit_status = -1;
-			pthread_mutex_unlock(&data->exit_status_mutex);
+			// pthread_mutex_unlock(&data->exit_status_mutex);
 			break ;
 		}
 		if (tmp->next != NULL)
@@ -81,6 +76,6 @@ int	manager(t_data *data, t_dlk *dlk)
 	}
 	if (tmp->is_alive == DEAD)
 		data = __philo_is_dead__(data, tmp);
-	pthread_mutex_unlock(&data->print_mutex);
+	// pthread_mutex_unlock(&data->print_mutex);
 	return (0);
 }

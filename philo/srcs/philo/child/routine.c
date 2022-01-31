@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 12:17:32 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/31 17:52:10 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/01/31 18:25:16 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 static t_dlk	*__philo_sleep__(t_dlk *dlk)
 {
 	print_status(dlk->data, dlk, SLEEP);
-	pthread_mutex_lock(&dlk->eating_number_mutex);
-	dlk->eating_number++;
-	pthread_mutex_unlock(&dlk->eating_number_mutex);
 	usleep(dlk->data->sleep);
 	print_status(dlk->data, dlk, THINK);
 	return (dlk);
@@ -27,6 +24,7 @@ static t_dlk	*__philo_eat__(t_dlk *dlk)
 {
 	print_status(dlk->data, dlk, EAT);
 	usleep(dlk->data->eat);
+	dlk->eating_number++;
 	dlk->fork = 1;
 	pthread_mutex_unlock(&dlk->fork_mutex);
 	dlk->next->fork = 1;
@@ -41,15 +39,13 @@ static t_dlk	*__philo_take_fork__(t_dlk *dlk)
 	pthread_mutex_lock(&dlk->next->fork_mutex);
 	dlk->next->fork = 0;
 	print_status(dlk->data, dlk, FORK);
+	dlk->last_eat_time = get_time();
 	return (dlk);
 }
 
 static t_dlk	*__routine__(t_dlk *dlk)
 {
 	dlk = __philo_take_fork__(dlk);
-	pthread_mutex_lock(&dlk->last_eat_time_mutex);
-	dlk->last_eat_time = get_time();
-	pthread_mutex_unlock(&dlk->last_eat_time_mutex);
 	dlk = __philo_eat__(dlk);
 	dlk = __philo_sleep__(dlk);
 	return (dlk);
@@ -63,3 +59,4 @@ void	do_routine(t_dlk *dlk)
 		__routine__(dlk);
 	return ;
 }
+
