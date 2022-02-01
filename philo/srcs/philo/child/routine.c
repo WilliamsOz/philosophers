@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 12:17:32 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/02/01 13:49:59 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/02/01 14:03:08 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ static t_dlk	*__routine__(t_dlk *dlk)
 
 void	do_routine(t_dlk *dlk)
 {
-	if (dlk->id % 2 == 0)
-		usleep(dlk->data->eat / 2);
+	// if (dlk->id % 2 == 0)
+		// usleep(dlk->data->eat / 2);
 	while (is_it_end(dlk) == FALSE)
 		__routine__(dlk);
 	return ;
