@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:45:54 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/31 18:16:27 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/02/01 13:51:53 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	destroy_all_mutex(t_data *data, t_dlk *dlk)
 		tmp = dlk;
 		dlk = dlk->next;
 		pthread_mutex_destroy(&tmp->fork_mutex);
-		pthread_mutex_destroy(&tmp->last_eat_time_mutex);
 		count -= 1;
 	}
 }

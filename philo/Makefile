@@ -6,7 +6,7 @@
 #    By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/09 17:07:58 by wiozsert          #+#    #+#              #
-#    Updated: 2022/01/31 18:23:08 by wiozsert         ###   ########.fr        #
+#    Updated: 2022/02/01 13:59:31 by wiozsert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRCS = ./srcs/data/init_data.c ./srcs/data/get_starting_time.c \
 ./srcs/philo/child/is_it_end.c ./srcs/philo/child/routine.c \
 ./srcs/philo/child/childs_routine.c ./srcs/philo/child/init_childs.c \
 ./srcs/dlk/get_philo_id.c ./srcs/dlk/get_last_node.c ./srcs/dlk/init_dlk.c \
-./srcs/dlk/init_dlk_mutex.c ./srcs/dlk/dlk_destroyer.c
+./srcs/dlk/dlk_destroyer.c
 
 OBJ = $(addsuffix .o, $(notdir $(basename $(SRCS))))
 

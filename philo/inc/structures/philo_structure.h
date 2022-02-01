@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 14:31:15 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/31 18:16:02 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/02/01 13:52:07 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ typedef struct s_dlk
 	int				is_alive;
 	int				last_eat_time;
 	int				eating_number;
-	pthread_mutex_t	last_eat_time_mutex;
 	struct s_dlk	*next;
 	struct s_dlk	*previous;
 	t_data			*data;

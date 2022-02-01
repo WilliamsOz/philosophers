@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 16:09:37 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/31 18:26:08 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/02/01 13:51:49 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static t_dlk	*__death_starving__(t_data *data, t_dlk *dlk)
 {
 	int	time_last_eat;
 
-	pthread_mutex_lock(&dlk->last_eat_time_mutex);
 	time_last_eat = 0;
 	time_last_eat = (get_time()) - dlk->last_eat_time;
 	if (get_time() != dlk->last_eat_time
@@ -25,7 +24,6 @@ static t_dlk	*__death_starving__(t_data *data, t_dlk *dlk)
 		if ((get_time() - dlk->last_eat_time) > (data->die / 1000))
 			dlk->is_alive = DEAD;
 	}
-	pthread_mutex_unlock(&dlk->last_eat_time_mutex);
 	return (dlk);
 }
 

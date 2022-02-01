@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 15:22:20 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/30 16:08:24 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/02/01 13:42:59 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,6 @@ static t_data	*__wait_childs__(t_data *data, t_dlk *dlk)
 
 t_data	*wait_threads(t_data *data, t_dlk *dlk)
 {
-	int	philo_exit_status;
-
-	philo_exit_status = 0;
 	data = __wait_childs__(data, dlk);
 	return (data);
 }
