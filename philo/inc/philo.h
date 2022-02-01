@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 22:03:15 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/30 16:23:38 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/02/01 15:25:03 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void    print_dlk(t_dlk *dlk);
 # define PRTDLK(x) print_dlk(x);
 # define EX exit(EXIT_SUCCESS);
 
-void	do_routine(t_dlk *dlk);
+t_dlk	*do_routine(t_dlk *dlk);
 int		is_it_end(t_dlk *dlk);
 void	*routine_childs(void *arg);
 void	print_status(t_data *data, t_dlk *tmp, int ind);

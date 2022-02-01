@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_philo_id.c                                     :+:      :+:    :+:   */
+/*   dlk_mall_failed.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/30 16:16:55 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/02/01 14:53:45 by wiozsert         ###   ########.fr       */
+/*   Created: 2022/02/01 14:52:47 by wiozsert          #+#    #+#             */
+/*   Updated: 2022/02/01 14:53:40 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/philo.h"
 
-t_dlk	*get_philo_id(t_dlk *dlk)
+t_data	*__mall_dlk_failed__(t_data *data)
+{
+	print_fd(2, "Malloc of dlk has failed\n");
+	data->exit_status = -1;
+	return (data);
+}
+
+t_data	*__mall_new_node_failed__(t_data *data, t_dlk *dlk)
 {
 	t_dlk	*tmp;
-	int		i;
-	int		count;
 
-	tmp = dlk;
-	count = dlk->data->philo_nbr;
-	i = 1;
-	while (count > 0)
+	while (dlk != NULL)
 	{
-		tmp->id = i;
-		count -= 1;
-		i += 1;
-		tmp = tmp->next;
+		tmp = dlk;
+		dlk = dlk->next;
+		free(tmp);
+		tmp = NULL;
 	}
-	return (dlk);
+	print_fd(2, "Malloc of new_node_dlk has failed\n");
+	data->exit_status = -1;
+	return (data);
 }

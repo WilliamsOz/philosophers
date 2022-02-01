@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 14:31:15 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/02/01 14:02:56 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/02/01 15:03:58 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 typedef struct s_data
 {
 	int				philo_nbr;
-	int				die;
-	int				eat;
-	int				sleep;
-	int				min_must_eat;
+	long			die;
+	long			eat;
+	long			sleep;
+	long			min_must_eat;
 	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	exit_status_mutex;
 	int				exit_status;
@@ -33,9 +33,8 @@ typedef struct s_dlk
 	pthread_mutex_t	fork_mutex;
 	int				id;
 	int				fork;
-	int				time;
 	int				is_alive;
-	int				last_eat_time;
+	long			last_eat_time;
 	int				eating_number;
 	struct s_dlk	*next;
 	struct s_dlk	*previous;

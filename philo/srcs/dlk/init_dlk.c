@@ -6,33 +6,22 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 17:26:42 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/01/30 16:56:42 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/02/01 15:36:10 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/philo.h"
 
-static t_data	*__mall_dlk_failed__(t_data *data)
+static t_dlk	*memset_dlk_data(t_data *data, t_dlk *dlk)
 {
-	print_fd(2, "Malloc of dlk has failed\n");
-	data->exit_status = -1;
-	return (data);
-}
-
-static t_data	*__mall_new_node_failed__(t_data *data, t_dlk *dlk)
-{
-	t_dlk	*tmp;
-
-	while (dlk != NULL)
-	{
-		tmp = dlk;
-		dlk = dlk->next;
-		free(tmp);
-		tmp = NULL;
-	}
-	print_fd(2, "Malloc of new_node_dlk has failed\n");
-	data->exit_status = -1;
-	return (data);
+	dlk->next = NULL;
+	dlk->previous = NULL;
+	dlk->is_alive = ALIVE;
+	dlk->last_eat_time = 0;
+	dlk->eating_number = 0;
+	dlk->data = data;
+	pthread_mutex_init(&dlk->fork_mutex, NULL);
+	return (dlk);
 }
 
 static t_dlk	*__get_all_node__(t_data *data, t_dlk *dlk, int philo_nbr)
@@ -49,14 +38,7 @@ static t_dlk	*__get_all_node__(t_data *data, t_dlk *dlk, int philo_nbr)
 			data = __mall_new_node_failed__(data, dlk);
 			return (NULL);
 		}
-		new_node->next = NULL;
-		new_node->time = 0;
-		new_node->is_alive = ALIVE;
-		new_node->fork = 1;
-		new_node->last_eat_time = 0;
-		new_node->eating_number = 0;
-		new_node->data = data;
-		pthread_mutex_init(&new_node->fork_mutex, NULL);
+		dlk = memset_dlk_data(data, dlk);
 		tmp = get_last_node(dlk);
 		tmp->next = new_node;
 		philo_nbr--;
@@ -97,16 +79,11 @@ t_dlk	*init_dlk(t_data *data, int philo_nbr)
 		data = __mall_dlk_failed__(data);
 		return (NULL);
 	}
-	dlk->next = NULL;
-	dlk->previous = NULL;
-	dlk->time = 0;
-	dlk->is_alive = ALIVE;
-	dlk->fork = 1;
-	dlk->last_eat_time = 0;
-	dlk->eating_number = 0;
-	dlk->data = data;
+	dlk = memset_dlk_data(data, dlk);
 	dlk = __get_all_node__(data, dlk, philo_nbr -1);
 	if (dlk != NULL)
 		dlk = link_dlk(dlk);
+	if (dlk->next == NULL)
+		dlk->next = dlk;
 	return (dlk);
 }
