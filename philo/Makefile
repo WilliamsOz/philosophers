@@ -19,7 +19,7 @@ SRCS = ./srcs/data/init_data.c ./srcs/data/get_starting_time.c \
 ./srcs/errors/is_emty.c ./srcs/errors/greater_than_integer.c \
 ./srcs/errors/errors.c ./srcs/errors/not_integer.c ./srcs/philo/manager.c \
 ./srcs/philo/wait_threads.c ./srcs/philo/print_status.c \
-./srcs/philo/child/is_it_end.c ./srcs/philo/child/routine.c \
+./srcs/philo/child/routine.c \
 ./srcs/philo/child/childs_routine.c ./srcs/philo/child/init_childs.c \
 ./srcs/dlk/get_philo_id.c ./srcs/dlk/get_last_node.c ./srcs/dlk/init_dlk.c \
 ./srcs/dlk/dlk_destroyer.c ./srcs/dlk/dlk_mall_failed.c

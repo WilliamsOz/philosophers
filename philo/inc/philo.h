@@ -51,7 +51,6 @@ void    print_dlk(t_dlk *dlk);
 # define EX exit(EXIT_SUCCESS);
 
 t_dlk	*do_routine(t_dlk *dlk);
-int		is_it_end(t_dlk *dlk);
 void	*routine_childs(void *arg);
 void	print_status(t_data *data, t_dlk *tmp, int ind);
 t_data	*wait_threads(t_data *data, t_dlk *dlk);

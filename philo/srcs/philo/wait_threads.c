@@ -19,7 +19,7 @@ static t_data	*__pthread_join_failed__(t_data *data)
 	return (data);
 }
 
-static t_data	*__wait_childs__(t_data *data, t_dlk *dlk)
+t_data	*wait_threads(t_data *data, t_dlk *dlk)
 {
 	t_dlk	*tmp;
 
@@ -42,11 +42,5 @@ static t_data	*__wait_childs__(t_data *data, t_dlk *dlk)
 		}
 		tmp = tmp->next;
 	}
-	return (data);
-}
-
-t_data	*wait_threads(t_data *data, t_dlk *dlk)
-{
-	data = __wait_childs__(data, dlk);
 	return (data);
 }
