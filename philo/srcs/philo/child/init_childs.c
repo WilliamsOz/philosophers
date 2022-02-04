@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 16:20:11 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/02/04 11:09:43 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/02/04 12:35:18 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	init_childs(t_data *data, t_dlk *dlk, int count, int ind)
 	t_dlk	*tmp;
 
 	tmp = dlk;
-	while (tmp->next != NULL && count > 0 && ind != -1)
+	while (count > 0 && ind != -1)
 	{
 		ind = pthread_create(&tmp->thread, NULL, &routine_childs, tmp);
 		if (ind != 0)

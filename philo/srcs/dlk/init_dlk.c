@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 17:26:42 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/02/04 11:23:33 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/02/04 12:30:53 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static t_dlk	*__get_all_node__(t_data *data, t_dlk *dlk, int philo_nbr)
 			data = __mall_new_node_failed__(data, dlk);
 			return (NULL);
 		}
-		dlk = memset_dlk_data(data, dlk);
+		new_node = memset_dlk_data(data, new_node);
 		tmp = get_last_node(dlk);
 		tmp->next = new_node;
 		philo_nbr--;
@@ -80,7 +80,7 @@ t_dlk	*init_dlk(t_data *data, int philo_nbr)
 		return (NULL);
 	}
 	dlk = memset_dlk_data(data, dlk);
-	dlk = __get_all_node__(data, dlk, philo_nbr -1);
+	dlk = __get_all_node__(data, dlk, philo_nbr);
 	if (dlk != NULL)
 		dlk = link_dlk(dlk);
 	if (dlk->next == NULL)

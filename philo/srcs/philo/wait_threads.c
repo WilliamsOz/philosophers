@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 15:22:20 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/02/01 14:59:57 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/02/04 12:35:07 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,11 @@ static t_data	*__pthread_join_failed__(t_data *data)
 t_data	*wait_threads(t_data *data, t_dlk *dlk)
 {
 	t_dlk	*tmp;
+	int		count;
 
-	while (dlk->next != NULL && dlk->id != 1)
-		dlk = dlk->next;
 	tmp = dlk;
-	if (pthread_join(tmp->thread, NULL) != 0)
-	{
-		data = __pthread_join_failed__(data);
-		return (data);
-	}
-	if (tmp->next != NULL)
-		tmp = tmp->next;
-	while (tmp->next != NULL && tmp->id != 1)
+	count = data->philo_nbr;
+	while (count > 0 && data->exit_status != -1)
 	{
 		if (pthread_join(tmp->thread, NULL) != 0)
 		{
@@ -41,6 +34,7 @@ t_data	*wait_threads(t_data *data, t_dlk *dlk)
 			return (data);
 		}
 		tmp = tmp->next;
+		count -= 1;
 	}
 	return (data);
 }
