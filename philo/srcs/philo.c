@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 22:19:14 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/02/01 15:26:48 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/02/04 11:35:37 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ int	philo(t_data *data, t_dlk *dlk, int philo_exit_status)
 		destroy_all_data(data, dlk);
 		return (philo_exit_status);
 	}
-	philo_exit_status = manager(data, dlk);
-	if (philo_exit_status != 0)
-	{
-		destroy_all_data(data, dlk);
-		return (philo_exit_status);
-	}
+	// philo_exit_status = manager(data, dlk);
+	// if (philo_exit_status != 0)
+	// {
+		// destroy_all_data(data, dlk);
+		// return (philo_exit_status);
+	// }
 	data = wait_threads(data, dlk);
 	if (data->exit_status == -1)
 	{

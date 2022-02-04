@@ -12,27 +12,27 @@
 
 #include "../../inc/philo.h"
 
-long	get_time(void)
+long	get_time(long actual_time_in_ms)
 {
-	static struct timeval		tv1;
-	static int					tmp;
-	struct timeval				tv2;
-	struct timeval				tv3;
+	static struct timeval		s_starting_time;
+	static int					which_entry = 0;
+	struct timeval				tmp_time;
+	struct timeval				actual_time;
 
-	if (tmp == 0)
+	if (which_entry == 0)
 	{
-		if (gettimeofday(&tv1, NULL))
-			return (-1);
-		tmp = 1;
+		gettimeofday(&s_starting_time, NULL);
+		which_entry = 1;
 	}
-	if (gettimeofday(&tv2, NULL))
-		return (-1);
-	tv3.tv_sec = tv2.tv_sec - tv1.tv_sec;
-	tv3.tv_usec = tv2.tv_usec - tv1.tv_usec;
-	if (tv3.tv_usec < 0)
+	gettimeofday(&tmp_time, NULL);
+	actual_time.tv_sec = tmp_time.tv_sec - s_starting_time.tv_sec;
+	actual_time.tv_usec = tmp_time.tv_usec - s_starting_time.tv_usec;
+	if (actual_time.tv_usec < 0)
 	{
-		tv3.tv_sec--;
-		tv3.tv_usec += 1000000;
+		actual_time.tv_sec--;
+		actual_time.tv_usec += 1000000;
 	}
-	return (tv3.tv_sec * 1000 + (tv3.tv_usec / 1000));
+	actual_time_in_ms = (actual_time.tv_sec * 1000)
+		+ (actual_time.tv_usec / 1000);
+	return (actual_time_in_ms);
 }
