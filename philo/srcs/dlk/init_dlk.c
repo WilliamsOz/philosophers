@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_dlk.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oozsertt <oozsertt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 17:26:42 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/02/04 12:30:53 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/02/10 00:17:03 by oozsertt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ t_dlk	*init_dlk(t_data *data, int philo_nbr)
 		return (NULL);
 	}
 	dlk = memset_dlk_data(data, dlk);
-	dlk = __get_all_node__(data, dlk, philo_nbr);
+	if (dlk->data->philo_nbr != 1)
+		dlk = __get_all_node__(data, dlk, philo_nbr -1);
 	if (dlk != NULL)
 		dlk = link_dlk(dlk);
 	if (dlk->next == NULL)
