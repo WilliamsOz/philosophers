@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structure.h                                        :+:      :+:    :+:   */
+/*   destroy_dlk.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/21 13:40:29 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/02/21 18:55:21 by wiozsert         ###   ########.fr       */
+/*   Created: 2022/02/21 18:52:45 by wiozsert          #+#    #+#             */
+/*   Updated: 2022/02/21 19:11:25 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTURE_H
-# define STRUCTURE_H
+#include "../../inc/philo.h"
 
-typedef struct s_data
+t_dlk	*destroy_dlk(t_dlk *dlk)
 {
-	int				number_of_philosopher;
-	int				die;
-	int				eat;
-	int				sleep;
-	int				min_must_eat;
-	pthread_mutex_t	print_mutex;
-	struct timeval	starting_time;
-}					t_data;
+	t_dlk	*tmp;
+	int		number_of_philosopher;
 
-typedef struct s_dlk
-{
-	int				id;
-	pthread_t		thread;
-	struct s_dlk	*next;
-	struct s_dlk	*previous;
-	struct s_data	*data;
-}					t_dlk;
-
-#endif
+	number_of_philosopher = dlk->data->number_of_philosopher;
+	while (number_of_philosopher > 0)
+	{
+		tmp = dlk;
+		dlk = dlk->next;
+		free(tmp);
+		number_of_philosopher -= 1;
+	}
+	return (dlk);
+}

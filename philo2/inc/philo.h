@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 10:57:40 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/02/21 18:06:41 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/02/21 18:52:20 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include "./errors.h"
 # include "./utils.h"
 # include "./data.h"
+# include "./dlk.h"
 # define FALSE 0
 # define TRUE 1
 
