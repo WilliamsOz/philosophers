@@ -6,12 +6,14 @@
 #    By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/21 10:42:30 by wiozsert          #+#    #+#              #
-#    Updated: 2022/02/21 19:06:28 by wiozsert         ###   ########.fr        #
+#    Updated: 2022/02/22 18:57:49 by wiozsert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
-CC = cc -Wall -Wextra -Werror -pthread -g3 -fsanitize=thread
+CC = cc -Wall -Wextra -Werror -pthread -g3 
+#-fsanitize=address
+#-fsanitize=thread
 # SRCS = ./srcs/philo.c
 SRCS = $(shell find . -name "*.c")
 

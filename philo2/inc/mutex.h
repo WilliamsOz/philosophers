@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destroy_data.c                                     :+:      :+:    :+:   */
+/*   mutex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/21 18:04:16 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/02/22 14:46:05 by wiozsert         ###   ########.fr       */
+/*   Created: 2022/02/22 15:39:18 by wiozsert          #+#    #+#             */
+/*   Updated: 2022/02/22 15:39:38 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/philo.h"
+#ifndef MUTEX_H
+# define MUTEX_H
 
-t_data	*destroy_data(t_data *data)
-{
-	if (data != NULL)
-	{
-		free(data);
-		data = NULL;
-	}
-	return (data);
-}
+void	init_mutex(t_data *data, t_dlk *dlk, int number_of_philosopher);
+
+#endif

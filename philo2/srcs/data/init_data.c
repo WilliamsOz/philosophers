@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 17:44:42 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/02/21 18:06:44 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/02/22 19:19:28 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 static t_data	*set_data(t_data *data, char **av)
 {
+	data->end = 0;
 	data->number_of_philosopher = ft_atoi(av[1]);
-	data->die = ft_atoi(av[2]);
-	data->eat = ft_atoi(av[3]);
-	data->sleep = ft_atoi(av[4]);
+	data->die = ft_atoi(av[2]) * 1000;
+	data->eat = ft_atoi(av[3]) * 1000;
+	data->sleep = ft_atoi(av[4]) * 1000;
 	if (av[5] == NULL)
 		data->min_must_eat = -1;
 	else

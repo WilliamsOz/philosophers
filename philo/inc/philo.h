@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 22:03:15 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/02/04 11:34:43 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/02/22 18:21:23 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include "data.h"
 # include "dlk.h"
 # include "time.h"
-# define ENDCOLOR 
+# define ENDCOLOR
 # define ERROR 2
 # define THREAD_CREATE_ERROR 2
 # define THREAD_JOIN_FAILED 2

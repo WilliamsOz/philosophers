@@ -6,13 +6,13 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 10:44:18 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/02/21 19:08:08 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/02/22 19:19:28 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-int	philo(char **av, int exit_status)
+int	philo(char **av)
 {
 	t_data	*data;
 	t_dlk	*dlk;
@@ -26,9 +26,16 @@ int	philo(char **av, int exit_status)
 		data = destroy_data(data);
 		return (2);
 	}
-	data = destroy_data(data);
+	init_mutex(data, dlk, data->number_of_philosopher);
+	if (init_thread(dlk, data->number_of_philosopher) == 2)
+	{
+		dlk = destroy_dlk(dlk);
+		data = destroy_data(data);
+		return (2);
+	}
 	dlk = destroy_dlk(dlk);
-	return (exit_status);
+	data = destroy_data(data);
+	return (0);
 }
 
 int main (int ac, char **av)
@@ -40,5 +47,5 @@ int main (int ac, char **av)
 	}
 	else if (errors(av) == TRUE)
 		return (2);
-	return (philo(av, 0));
+	return (philo(av));
 }

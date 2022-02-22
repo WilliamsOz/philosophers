@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destroy_data.c                                     :+:      :+:    :+:   */
+/*   time.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/21 18:04:16 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/02/22 14:46:05 by wiozsert         ###   ########.fr       */
+/*   Created: 2022/02/22 16:46:03 by wiozsert          #+#    #+#             */
+/*   Updated: 2022/02/22 16:56:59 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/philo.h"
+#ifndef TIME_H
+# define TIME_H
 
-t_data	*destroy_data(t_data *data)
-{
-	if (data != NULL)
-	{
-		free(data);
-		data = NULL;
-	}
-	return (data);
-}
+long	get_time(long actual_time_in_ms);
+
+#endif

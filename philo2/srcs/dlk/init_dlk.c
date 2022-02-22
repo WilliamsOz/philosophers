@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:51:26 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/02/21 19:08:58 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/02/22 18:59:09 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,34 @@ static t_dlk	*set_dlk(t_data *data, t_dlk *dlk, int id)
 	tmp = dlk;
 	while (tmp->next != NULL)
 	{
+		tmp->time_last_meal = 0;
+		tmp->number_of_meal = 0;
 		tmp->data = data;
 		tmp->id = id;
 		id += 1;
 		tmp = tmp->next;
 	}
+	tmp->time_last_meal = 0;
+	tmp->number_of_meal = 0;
 	tmp->data = data;
 	tmp->id = id;
 	tmp->next = dlk;
+	dlk->previous = tmp;
+	return (dlk);
+}
+
+static t_dlk	*link_dlk(t_dlk *dlk, int number_of_philosopher)
+{
+	t_dlk	*tmp;
+
+	tmp = dlk;
+	while (number_of_philosopher > 0)
+	{
+		dlk = dlk->next;
+		dlk->previous = tmp;
+		tmp = tmp->next;
+		number_of_philosopher -= 1;
+	}
 	return (dlk);
 }
 
@@ -76,5 +96,7 @@ t_dlk	*init_dlk(t_data *data, int number_of_philosopher)
 	dlk->next = NULL;
 	dlk = get_all_node(dlk, number_of_philosopher - 1);
 	dlk = set_dlk(data, dlk, 1);
+	if (number_of_philosopher != 1)
+		dlk = link_dlk(dlk, number_of_philosopher);
 	return (dlk);
 }

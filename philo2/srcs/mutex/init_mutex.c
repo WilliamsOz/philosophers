@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destroy_data.c                                     :+:      :+:    :+:   */
+/*   init_mutex.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/21 18:04:16 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/02/22 14:46:05 by wiozsert         ###   ########.fr       */
+/*   Created: 2022/02/22 15:38:52 by wiozsert          #+#    #+#             */
+/*   Updated: 2022/02/22 18:31:10 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/philo.h"
 
-t_data	*destroy_data(t_data *data)
+void	init_mutex(t_data *data, t_dlk *dlk, int number_of_philosopher)
 {
-	if (data != NULL)
+	pthread_mutex_init(&data->print_mutex, NULL);
+	while (number_of_philosopher > 0)
 	{
-		free(data);
-		data = NULL;
+		pthread_mutex_init(&dlk->fork_mutex, NULL);
+		dlk = dlk->next;
+		number_of_philosopher -= 1;
 	}
-	return (data);
 }

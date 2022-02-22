@@ -1,29 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destroy_dlk.c                                      :+:      :+:    :+:   */
+/*   init_thread.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/21 18:52:45 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/02/22 14:42:56 by wiozsert         ###   ########.fr       */
+/*   Created: 2022/02/22 17:10:02 by wiozsert          #+#    #+#             */
+/*   Updated: 2022/02/22 18:53:36 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/philo.h"
 
-t_dlk	*destroy_dlk(t_dlk *dlk)
+static void	wait_thread(t_dlk *dlk, int number_of_philosopher)
 {
 	t_dlk	*tmp;
-	int		number_of_philosopher;
 
-	number_of_philosopher = dlk->data->number_of_philosopher;
+	tmp = dlk;
 	while (number_of_philosopher > 0)
 	{
-		tmp = dlk;
-		dlk = dlk->next;
-		free(tmp);
+		pthread_join(tmp->thread, NULL);
+		tmp = tmp->next;
 		number_of_philosopher -= 1;
 	}
-	return (dlk);
+}
+
+int	init_thread(t_dlk *dlk, int number_of_philosopher)
+{
+	get_time(0);
+	while (number_of_philosopher > 0)
+	{
+		if (pthread_create(&dlk->thread, NULL, &routine, dlk) != 0)
+		{
+			print_fd(2, "pthread_create has failed\n");
+			return (2);
+		}
+		dlk = dlk->next;
+		number_of_philosopher -= 1;
+	}
+	wait_thread(dlk, dlk->data->number_of_philosopher);
+	return (0);
 }
