@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 17:11:27 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/02/22 19:22:52 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/02/22 19:32:02 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 t_dlk	*do_routine(t_dlk *dlk)
 {
-	if ((get_time(0) - dlk->time_last_meal) > dlk->data->die / 1000)
-	{
-		print_status(dlk->data, dlk, DEAD);
-		dlk->data->end = 1;
-		return (dlk);
-	}
+	// if ((get_time(0) - dlk->time_last_meal) > dlk->data->die / 1000)
+	// {
+	// 	print_status(dlk->data, dlk, DEAD);
+	// 	dlk->data->end = 1;
+	// 	return (dlk);
+	// }
 	pthread_mutex_lock(&dlk->fork_mutex);
 	print_status(dlk->data, dlk, FORK);
 	pthread_mutex_lock(&dlk->previous->fork_mutex);
