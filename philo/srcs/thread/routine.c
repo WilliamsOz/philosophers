@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 17:11:27 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/04/04 13:28:14 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/04/04 13:43:13 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ t_dlk	*do_routine(t_dlk *dlk)
 {
 	pthread_mutex_lock(&dlk->fork_mutex);
 	print_status(dlk->data, dlk, FORK);
-	if (dlk->id == 2)
-		printf("COUCOU\n");
 	if (dlk->id == dlk->previous->id)
 	{
 		dlk = one_philo(dlk);
@@ -42,7 +40,7 @@ t_dlk	*do_routine(t_dlk *dlk)
 	}
 	pthread_mutex_lock(&dlk->previous->fork_mutex);
 	print_status(dlk->data, dlk, FORK);
-	pthread_mutex_lock(&dlk->	eat_mutex);
+	pthread_mutex_lock(&dlk->eat_mutex);
 	dlk->time_last_meal = get_time(dlk->data, 0);
 	pthread_mutex_unlock(&dlk->eat_mutex);
 	print_status(dlk->data, dlk, EAT);

@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 10:44:18 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/04/04 10:40:24 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/04/04 13:43:43 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,7 @@ int	main(int ac, char **av)
 	}
 	else if (errors(av) == TRUE)
 		return (2);
+	if (ft_atoi(av[5]) == 0)
+		return (0);
 	return (philo(av));
 }
