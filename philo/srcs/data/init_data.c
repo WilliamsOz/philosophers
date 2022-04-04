@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 17:44:42 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/02/22 19:19:28 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/04/04 10:25:04 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static t_data	*set_data(t_data *data, char **av)
 	if (av[5] == NULL)
 		data->min_must_eat = -1;
 	else
-		data->min_must_eat = ft_atoi(av[5]);	
+		data->min_must_eat = ft_atoi(av[5]);
 	return (data);
 }
 

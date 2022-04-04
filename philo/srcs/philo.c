@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 10:44:18 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/02/22 19:19:28 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/04/04 10:40:24 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	philo(char **av)
 	return (0);
 }
 
-int main (int ac, char **av)
+int	main(int ac, char **av)
 {
 	if (ac != 5 && ac != 6)
 	{

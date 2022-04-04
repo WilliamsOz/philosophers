@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 13:40:29 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/02/23 18:40:58 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/04/04 10:44:06 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ typedef struct s_data
 	int				sleep;
 	int				end;
 	int				min_must_eat;
-	pthread_t		god;
 	pthread_mutex_t	print_mutex;
+	pthread_mutex_t	end_mutex;
 	struct timeval	starting_time;
 }					t_data;
 

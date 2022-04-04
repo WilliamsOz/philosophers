@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 10:57:40 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/02/22 19:15:56 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/04/04 10:40:32 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,5 @@
 # define EAT 1
 # define SLEEP 2
 # define THINK 3
-# define DEAD 4
-
-//DELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDEL
-# define PD(x) printf("%d\n", x);
-# define PL(x) printf("%ld\n", x);
-# define PC(x) printf("%c\n", x);
-# define PS(x) printf("%s\n", x);
-# define PP(x) printf("%p\n", x);
-# define ICI printf("ICI\n");
-# define EX exit(EXIT_SUCCESS);
-//DELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDELDEL
 
 #endif

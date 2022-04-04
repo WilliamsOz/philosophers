@@ -6,16 +6,21 @@
 #    By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/21 10:42:30 by wiozsert          #+#    #+#              #
-#    Updated: 2022/02/23 18:59:23 by wiozsert         ###   ########.fr        #
+#    Updated: 2022/04/04 10:55:33 by wiozsert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
-CC = cc -Wall -Wextra -Werror -pthread -g3
+CC = cc -Wall -Wextra -Werror -pthread #-g3 -fsanitize=thread
 #-fsanitize=address
--fsanitize=thread
-# SRCS = ./srcs/philo.c
-SRCS = $(shell find . -name "*.c")
+
+SRCS = ./srcs/thread/print_status.c ./srcs/thread/init_thread.c \
+./srcs/thread/routine.c ./srcs/dlk/destroy_dlk.c ./srcs/dlk/init_dlk.c \
+./srcs/errors/is_emty.c ./srcs/errors/greater_than_integer.c \
+./srcs/errors/errors.c ./srcs/errors/not_integer.c ./srcs/mutex/init_mutex.c \
+./srcs/time/get_time.c ./srcs/utils/ft_atol.c ./srcs/utils/print_fd.c \
+./srcs/utils/ft_strlen.c ./srcs/utils/ft_atoi.c ./srcs/philo.c \
+./srcs/data/destroy_data.c ./srcs/data/init_data.c \
 
 OBJ = $(addsuffix .o, $(notdir $(basename $(SRCS))))
 
