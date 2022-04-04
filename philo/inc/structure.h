@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 13:40:29 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/04/04 10:44:06 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/04/04 12:55:56 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_dlk
 	struct s_dlk	*next;
 	struct s_dlk	*previous;
 	struct s_data	*data;
+	pthread_mutex_t	eat_mutex;
 	pthread_mutex_t	fork_mutex;
 }					t_dlk;
 

@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 17:10:02 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/04/04 10:55:54 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/04/04 13:07:33 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,20 @@ static void	wait_thread(t_dlk *dlk, int number_of_philosopher)
 	t_dlk	*tmp;
 
 	tmp = dlk;
-	while (1 && dlk->data->end != 1)
+	while (1)
 	{
+		pthread_mutex_lock(&dlk->data->end_mutex);
+		if (dlk->data->end == 1)
+		{
+			pthread_mutex_unlock(&dlk->data->end_mutex);
+			break ;
+		}
+		pthread_mutex_unlock(&dlk->data->end_mutex);
+		pthread_mutex_lock(&dlk->eat_mutex);
 		if ((get_time(dlk->data, 0)
 				- dlk->time_last_meal) > dlk->data->die / 1000)
 		{
+			pthread_mutex_unlock(&dlk->eat_mutex);
 			printf("\033[0;31m");
 			printf("%ld	%d	died\n", get_time(dlk->data, 0), dlk->id);
 			printf("\033[0m");
@@ -30,6 +39,7 @@ static void	wait_thread(t_dlk *dlk, int number_of_philosopher)
 			pthread_mutex_unlock(&dlk->data->end_mutex);
 			break ;
 		}
+		pthread_mutex_unlock(&dlk->eat_mutex);
 	}
 	while (number_of_philosopher > 0)
 	{

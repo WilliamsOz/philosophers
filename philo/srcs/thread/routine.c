@@ -6,27 +6,45 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 17:11:27 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/04/04 10:56:18 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/04/04 13:28:14 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/philo.h"
 
+t_dlk	*one_philo(t_dlk *dlk)
+{
+	pthread_mutex_unlock(&dlk->fork_mutex);
+	while (1)
+	{
+		pthread_mutex_lock(&dlk->data->end_mutex);
+		if (dlk->data->end == 1)
+		{
+			pthread_mutex_unlock(&dlk->data->end_mutex);
+			break ;
+		}
+		else
+			pthread_mutex_unlock(&dlk->data->end_mutex);
+	}
+	return (dlk);
+}
+
 t_dlk	*do_routine(t_dlk *dlk)
 {
 	pthread_mutex_lock(&dlk->fork_mutex);
 	print_status(dlk->data, dlk, FORK);
+	if (dlk->id == 2)
+		printf("COUCOU\n");
 	if (dlk->id == dlk->previous->id)
 	{
-		pthread_mutex_unlock(&dlk->fork_mutex);
-		while (1)
-			if (dlk->data->end == 1)
-				break ;
+		dlk = one_philo(dlk);
 		return (dlk);
 	}
 	pthread_mutex_lock(&dlk->previous->fork_mutex);
 	print_status(dlk->data, dlk, FORK);
+	pthread_mutex_lock(&dlk->	eat_mutex);
 	dlk->time_last_meal = get_time(dlk->data, 0);
+	pthread_mutex_unlock(&dlk->eat_mutex);
 	print_status(dlk->data, dlk, EAT);
 	usleep(dlk->data->eat);
 	dlk->number_of_meal += 1;

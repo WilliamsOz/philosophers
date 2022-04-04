@@ -6,12 +6,12 @@
 #    By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/21 10:42:30 by wiozsert          #+#    #+#              #
-#    Updated: 2022/04/04 10:55:33 by wiozsert         ###   ########.fr        #
+#    Updated: 2022/04/04 13:19:49 by wiozsert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
-CC = cc -Wall -Wextra -Werror -pthread #-g3 -fsanitize=thread
+CC = cc -Wall -Wextra -Werror -pthread -g3 -fsanitize=thread
 #-fsanitize=address
 
 SRCS = ./srcs/thread/print_status.c ./srcs/thread/init_thread.c \
