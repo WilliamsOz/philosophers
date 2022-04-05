@@ -6,13 +6,13 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 16:46:03 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/04/04 10:44:08 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/04/05 15:38:15 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TIME_H
 # define TIME_H
 
-long	get_time(t_data *data, long actual_time_in_ms);
+long	get_time(long actual_time_in_ms);
 
 #endif

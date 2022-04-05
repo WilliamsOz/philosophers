@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 17:11:27 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/04/05 15:15:45 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/04/05 15:38:52 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_dlk	*do_routine(t_dlk *dlk)
 	print_status(dlk->data, dlk, FORK);
 	print_status(dlk->data, dlk, EAT);
 	pthread_mutex_lock(&dlk->time_last_meal_mutex);
-	dlk->time_last_meal = get_time(dlk->data, 0);
+	dlk->time_last_meal = get_time(0);
 	pthread_mutex_unlock(&dlk->time_last_meal_mutex);
 	usleep(dlk->data->eat);
 	dlk->number_of_meal += 1;

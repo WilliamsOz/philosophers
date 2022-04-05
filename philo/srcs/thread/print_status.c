@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 15:16:39 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/04/05 15:32:09 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/04/05 15:38:48 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	__philo_sleep(t_dlk *dlk)
 {
-	ft_putnbr(get_time(dlk->data, 0));
+	ft_putnbr(get_time(0));
 	write(STDOUT_FILENO, "	", 1);
 	ft_putnbr(dlk->id);
 	write(STDOUT_FILENO, "	is sleeping\n", 13);
@@ -22,7 +22,7 @@ static void	__philo_sleep(t_dlk *dlk)
 
 static void	__philo_eat__(t_dlk *dlk)
 {
-	ft_putnbr(get_time(dlk->data, 0));
+	ft_putnbr(get_time(0));
 	write(STDOUT_FILENO, "	", 1);
 	ft_putnbr(dlk->id);
 	write(STDOUT_FILENO, "	is eating\n", 11);
@@ -30,7 +30,7 @@ static void	__philo_eat__(t_dlk *dlk)
 
 static void	__philo_fork__(t_dlk *dlk)
 {
-	ft_putnbr(get_time(dlk->data, 0));
+	ft_putnbr(get_time(0));
 	write(STDOUT_FILENO, "	", 1);
 	ft_putnbr(dlk->id);
 	write(STDOUT_FILENO, "	has taken a fork\n", 18);
@@ -38,7 +38,7 @@ static void	__philo_fork__(t_dlk *dlk)
 
 static void	__philo_think__(t_dlk *dlk)
 {
-	ft_putnbr(get_time(dlk->data, 0));
+	ft_putnbr(get_time(0));
 	write(STDOUT_FILENO, "	", 1);
 	ft_putnbr(dlk->id);
 	write(STDOUT_FILENO, "	is thinking\n", 13);

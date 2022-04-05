@@ -6,20 +6,19 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 16:45:36 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/04/05 15:18:20 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/04/05 15:38:55 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/philo.h"
 
-long	get_time(t_data *data, long actual_time_in_ms)
+long	get_time(long actual_time_in_ms)
 {
 	static struct timeval		s_starting_time;
 	static int					first_entry = 0;
 	struct timeval				tmp_time;
 	struct timeval				actual_time;
 
-	(void)data;
 	if (first_entry == 0)
 	{
 		gettimeofday(&s_starting_time, NULL);
