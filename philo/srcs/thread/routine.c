@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oozsertt <oozsertt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 17:11:27 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/04/04 15:34:22 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/04/05 11:23:52 by oozsertt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,22 @@ t_dlk	*do_routine(t_dlk *dlk)
 {
 	pthread_mutex_lock(&dlk->fork_mutex);
 	print_status(dlk->data, dlk, FORK);
-	if (dlk->id == dlk->previous->id)
+	if (dlk->id == dlk->next->id)
 	{
 		dlk = one_philo(dlk);
 		return (dlk);
 	}
 	pthread_mutex_unlock(&dlk->fork_mutex);
-	pthread_mutex_lock(&dlk->previous->fork_mutex);
+	pthread_mutex_lock(&dlk->next->fork_mutex);
 	print_status(dlk->data, dlk, FORK);
 	pthread_mutex_lock(&dlk->eat_mutex);
 	dlk->time_last_meal = get_time(dlk->data, 0);
 	pthread_mutex_unlock(&dlk->eat_mutex);
 	print_status(dlk->data, dlk, EAT);
 	usleep(dlk->data->eat);
-	pthread_mutex_unlock(&dlk->previous->fork_mutex);
 	dlk->number_of_meal += 1;
 	print_status(dlk->data, dlk, SLEEP);
+	pthread_mutex_unlock(&dlk->next->fork_mutex);
 	usleep(dlk->data->sleep);
 	print_status(dlk->data, dlk, THINK);
 	return (dlk);
