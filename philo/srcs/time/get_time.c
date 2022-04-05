@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 16:45:36 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/04/04 10:44:04 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/04/05 15:18:20 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ long	get_time(t_data *data, long actual_time_in_ms)
 	struct timeval				tmp_time;
 	struct timeval				actual_time;
 
-	pthread_mutex_lock(&data->end_mutex);
+	(void)data;
 	if (first_entry == 0)
 	{
 		gettimeofday(&s_starting_time, NULL);
@@ -35,6 +35,5 @@ long	get_time(t_data *data, long actual_time_in_ms)
 	}
 	actual_time_in_ms = (actual_time.tv_sec * 1000)
 		+ (actual_time.tv_usec / 1000);
-	pthread_mutex_unlock(&data->end_mutex);
 	return (actual_time_in_ms);
 }

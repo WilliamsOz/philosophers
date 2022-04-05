@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oozsertt <oozsertt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 17:11:27 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/04/05 11:23:52 by oozsertt         ###   ########.fr       */
+/*   Updated: 2022/04/05 15:15:45 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ t_dlk	*do_routine(t_dlk *dlk)
 	pthread_mutex_unlock(&dlk->fork_mutex);
 	pthread_mutex_lock(&dlk->next->fork_mutex);
 	print_status(dlk->data, dlk, FORK);
-	pthread_mutex_lock(&dlk->eat_mutex);
-	dlk->time_last_meal = get_time(dlk->data, 0);
-	pthread_mutex_unlock(&dlk->eat_mutex);
 	print_status(dlk->data, dlk, EAT);
+	pthread_mutex_lock(&dlk->time_last_meal_mutex);
+	dlk->time_last_meal = get_time(dlk->data, 0);
+	pthread_mutex_unlock(&dlk->time_last_meal_mutex);
 	usleep(dlk->data->eat);
 	dlk->number_of_meal += 1;
-	print_status(dlk->data, dlk, SLEEP);
 	pthread_mutex_unlock(&dlk->next->fork_mutex);
+	print_status(dlk->data, dlk, SLEEP);
 	usleep(dlk->data->sleep);
 	print_status(dlk->data, dlk, THINK);
 	return (dlk);
@@ -64,8 +64,10 @@ void	*routine(void *arg)
 	while (1)
 	{
 		pthread_mutex_lock(&dlk->data->end_mutex);
-		if (dlk->data->end == 1)
+		if (dlk->data->end == 1
+			|| dlk->number_of_meal == dlk->data->min_must_eat)
 		{
+			dlk->data->end = 1;
 			pthread_mutex_unlock(&dlk->data->end_mutex);
 			break ;
 		}
@@ -74,11 +76,6 @@ void	*routine(void *arg)
 			pthread_mutex_unlock(&dlk->data->end_mutex);
 			dlk = do_routine(dlk);
 		}
-		if (dlk->number_of_meal == dlk->data->min_must_eat)
-			break ;
 	}
-	pthread_mutex_lock(&dlk->data->end_mutex);
-	dlk->data->end = 1;
-	pthread_mutex_unlock(&dlk->data->end_mutex);
 	return (NULL);
 }

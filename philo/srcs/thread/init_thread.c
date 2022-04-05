@@ -6,7 +6,7 @@
 /*   By: wiozsert <wiozsert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 17:10:02 by wiozsert          #+#    #+#             */
-/*   Updated: 2022/04/04 15:01:11 by wiozsert         ###   ########.fr       */
+/*   Updated: 2022/04/05 15:29:43 by wiozsert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,19 @@
 
 static int	philo_die_by_starve(t_dlk *dlk)
 {
-	pthread_mutex_lock(&dlk->eat_mutex);
+	pthread_mutex_lock(&dlk->time_last_meal_mutex);
 	if ((get_time(dlk->data, 0)
 			- dlk->time_last_meal) > dlk->data->die / 1000)
 	{
-		pthread_mutex_unlock(&dlk->eat_mutex);
-		printf("\033[0;31m");
-		printf("%ld	%d	died\n", get_time(dlk->data, 0), dlk->id);
-		printf("\033[0m");
-		pthread_mutex_lock(&dlk->data->end_mutex);
+		pthread_mutex_unlock(&dlk->time_last_meal_mutex);
+		ft_putnbr(get_time(dlk->data, 0));
+		write(STDOUT_FILENO, "	", 1);
+		ft_putnbr(dlk->id);
+		write(STDOUT_FILENO, "	died\n", 6);
 		dlk->data->end = 1;
-		pthread_mutex_unlock(&dlk->data->end_mutex);
 		return (TRUE);
 	}
-	pthread_mutex_unlock(&dlk->eat_mutex);
+	pthread_mutex_unlock(&dlk->time_last_meal_mutex);
 	return (FALSE);
 }
 
@@ -39,14 +38,16 @@ static void	wait_thread(t_dlk *dlk, int number_of_philosopher)
 	while (1)
 	{
 		pthread_mutex_lock(&dlk->data->end_mutex);
-		if (dlk->data->end == 1)
+		if (dlk->data->end == 1 || philo_die_by_starve(dlk) == TRUE)
 		{
 			pthread_mutex_unlock(&dlk->data->end_mutex);
 			break ;
 		}
-		pthread_mutex_unlock(&dlk->data->end_mutex);
-		if (philo_die_by_starve(dlk) == TRUE)
-			break ;
+		else
+		{
+			pthread_mutex_unlock(&dlk->data->end_mutex);
+			dlk = dlk->next;
+		}
 	}
 	while (number_of_philosopher > 0)
 	{
